@@ -1,0 +1,351 @@
+.navbar{
+    position: fixed;
+    top: 0%;
+    margin-left: 9%;
+    margin-right: 9%;
+    width: 82%;
+    height: 8%;
+    padding-top: 2%;
+    text-align: center;
+    background-color:white;
+    align-content: center;
+    border-bottom: 1px black double;
+    z-index: 1;
+}
+
+.unit1{
+    width: 50%;
+    float: left;
+    background-color: inherit;
+}
+
+.unit2{
+    width: 50%;
+    float: right;
+    position: absolute;
+    margin-left: 50%;
+    background-color: inherit;
+}
+
+
+@media (min-width:820px){
+    .navbar{
+        display: block;
+    }
+    .unit3{
+        display: none;
+    }
+    .unit4{
+        display: none;
+    }
+}
+@media (max-width:819px){
+    .navbar{
+        display: none;
+    }
+    .unit3{
+        top: 0;
+        display: block;
+        float: left;
+        position: fixed;
+        font-size: large;
+        z-index: 1;
+        width: 80%;
+        height: 6.5%;
+        margin-left: 9%;
+        background-color: white;
+    }
+    .unit4{
+        margin-left: 0;
+        padding-top: 5%;
+        padding-left: 0;
+        align-content:left;
+        z-index: 1;
+        float: left;
+    }
+}
+.nav_item{
+    font-size: large;
+    display: inline;
+    float: left;
+    background-color: white;
+    border-color: transparent;
+    border-width: 5px;
+    border-bottom-style: solid;
+}
+button{
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+.nav_item:hover{
+    border-bottom-color:#c99947;
+    color: #c99947;
+    display: block;
+}
+.submenu{
+    display: none;
+    width:10%;
+    background-color: transparent;
+    list-style-type: none;
+}
+ .nav_item:hover>ul{
+     display: block;
+ }
+
+.nav_item:active{
+    border-bottom-color:#c99947;
+    color: #c99947;
+}
+form{
+    background-color: transparent;
+    float: right;
+    display: inline;
+    position: relative;
+}
+form button{
+    font-size: large;
+}
+
+.content{
+    position: static;
+    margin-top: 5%;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+  
+.sidenav li a,.sidenav li{
+    margin-left: 2%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+  
+.sidenav li:hover a:hover,.sidenav li:hover{
+    color: #c99947;
+}
+
+.sidenav li:hover>ul{
+    display: block;
+}
+ 
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.sidemenu-content{
+    position: fixed;
+    z-index: 2;
+    font-size:30px;
+    cursor:pointer;
+}
+  
+@media (max-width: 819px) {
+    .sidemenu.content{display:block;}
+}
+
+@media (min-width:820px){
+    .sidemenu-content{
+        display: none;
+    }
+}
+
+.mySlides {
+    display: none
+}
+
+img {
+    vertical-align: middle;
+    height:800px;
+    z-index: -1;
+}
+
+.head2{
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.head2 p{
+    float:left;
+}
+.logo{
+
+	border: solid 2pt black;
+	padding:1%;
+ 	height:auto;
+	width:150px;
+	font-size:155%;
+}
+.ctg{
+    float:right;
+    padding:0;
+    margin:0;
+    overflow: hidden;
+}
+
+a{
+    text-decoration:none;
+    color:black;
+    font-size:110%;
+    padding-top:20px;
+}
+
+.circle {
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    border: 1pt dashed #adad85;
+    display:inline-block;
+    line-height:50px;
+    vertical-align:center;
+    text-align:center;
+    color:black;
+    font-size:125%;
+    font-family: "Lucida Console", Courier, monospace;
+}
+
+a.circle:hover {
+        border-radius: 100%;
+        width: 80px;
+        height: 80px;
+        border: 2pt dashed #c99947;
+        display:inline-block;
+        line-height:50px;
+        vertical-align:center;
+        text-align:center;
+        color:#c99947;
+        font-family: "Lucida Console", Courier, monospace;
+}
+
+
+.ele3{
+    padding-top:50px;
+    padding-left:10%;
+    padding-right:10%;
+}
+.slideshow-container {
+    max-width: 100000px;
+    position: relative;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+.rectangle {
+    width: 32%;
+    height: 100px;
+    border: 1pt dashed #adad85;
+    display:inline-block;
+    line-height:50px;
+    vertical-align:center;
+    text-align:center;
+    color:black;
+    font-size:125%;
+    overflow: hidden;
+    font-family: "Lucida Console", Courier, monospace;
+}
+
+.rectangle:hover {
+    width: 32%;
+    height: 100px;
+    border: 2pt dashed #c99947;
+    display:inline-block;
+    line-height:50px;
+    vertical-align:center;
+    text-align:center;
+    color:#c99947;
+    overflow: hidden;
+    font-family: "Lucida Console", Courier, monospace;
+}
+
+@media (max-width: 800px) {
+    .rectangle-responsive{
+        width:100%;
+    }
+    .rectangle-responsive:hover{
+        width:100%;
+    }
+
+}
+
+@media (min-width:801px){
+    .rectangle-responsive{
+        padding-top: 4%;
+        height: 100px;
+    }
+}

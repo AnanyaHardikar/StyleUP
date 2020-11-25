@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Style UP</title>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        
+    </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <div class="unit1">
+                    <a href="/"><button class="nav_item"> Home</button></a>
+                    <button class="nav_item">Category
+                        <ul class="submenu">
+                            <li><a href="/men/" class="nav_item">Men</a></li>
+                            <li><a href="/women/" class="nav_item">Women</a></li>
+                            <li><a href="/kids/" class="nav_item">Kids</a></li>
+                        </ul>
+                    </button>
+                    <a href="/blog/"><button class="nav_item">Blog</button></a>
+                </div>
+                <div class="unit2">
+                    <form action="">  
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="" >
+                        <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <ul>
+                    <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li> Category
+                            <ul class="submenu">
+                                <li><a href="/men/">Men</a></li>
+                                <li><a href="/women/" >Women</a></li>
+                                <li><a href="/kids/" >Kids</a></li>
+                            </ul>
+                    </li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+            </div>
+            <span class="sidemenu-content" onclick="openNav()">&#9776; </span>
+                <div class="unit3">
+                    <form action="">  
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="">
+                        
+                        <button type="submit" style="float: right;"><i class="fa fa-search" ></i></button>
+                        <div class="unit4">
+                            <input type="text" name="search" placeholder="Search here.." size="13"  style="border:none;outline:none;">
+                        </div>
+                    </form>
+                </div>
+        </header>
+        <br>
+        <div class="content">
+            <div class="head2">
+                <p class="logo"><b>S T Y L E U P</b></p>
+                <div class="ctg">
+                    <a class="circle" href="men.html">Men</a>
+                    <a  class="circle" href="women.html">Women</a>
+                    <a class="circle" href="kids.html">Kids</a>
+                </div>
+            </div>
+        
+            <div class="ele3">
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <img src="static/images/img1.jpg" style="width:100%">
+                        <div class="text">Caption Text</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="static/images/img2.jpg" style="width:100%">
+                        <div class="text">Caption Two</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="static/images/img3.jpg" style="width:100%">
+                        <div class="text">Caption Three</div>
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+            </div>
+            <div style="margin-left: 10%;margin-right: 10%; height: 100%;">
+                <p class="rectangle rectangle-responsive"><i class="fa fa-paper-plane"></i> Free shipping world wide</p>
+                <p class="rectangle rectangle-responsive"><i class="fa fa-refresh"></i> Money back guarentee</p>
+                <p class="rectangle rectangle-responsive"><i class="fas fa-headset"></i> Online support 24/7</p>
+            </div>
+        </div> 
+        <footer>
+        
+        </footer>
+    </body>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        var slideIndex = 1;
+        showSlides(slideIndex);
+        
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+        }
+
+        </script>
+</html>
