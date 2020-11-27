@@ -85,7 +85,7 @@ button{
 }
 .submenu{
     display: none;
-    width:200%;
+    width:150%;
     background-color: transparent;
     list-style-type: none;
 }
@@ -94,9 +94,10 @@ button{
 }
 .subcategory li{
     list-style-type: none;
+    
 }
 .nav_item:hover>.subcategory{
-    display: inline-block;
+    display: block;
 }
 .nav_item:hover>ul{
      display: block;
