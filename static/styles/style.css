@@ -85,13 +85,25 @@ button{
 }
 .submenu{
     display: none;
-    width:10%;
+    width:200%;
     background-color: transparent;
     list-style-type: none;
 }
- .nav_item:hover>ul{
+.nav_item>.subcategory {
+    display: none;
+}
+.subcategory li{
+    list-style-type: none;
+}
+.nav_item:hover>.subcategory{
+    display: inline-block;
+}
+.nav_item:hover>ul{
      display: block;
- }
+}
+.submenu li .nav_item:hover,a.nav_item ul.submenu li:hover{
+    display: block;
+}
 
 .nav_item:active{
     border-bottom-color:#c99947;
@@ -372,8 +384,8 @@ blockquote{
     margin-right:20%;
     font-family:Sofia;
 }
-@media (max-width:800px){
-    .logo{
+@media (max-width:819px){
+    #logosmall{
         display:none;
     }
     .vl{
@@ -398,7 +410,7 @@ blockquote{
 }
 .display:hover {
 opacity:0.7;}
-@media (max-width:800px){
+@media (max-width:820px){
 .brand-display{
 margin-top:25%;
 }
