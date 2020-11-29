@@ -8,7 +8,20 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/shop.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type=text/javascript>
+            function AddToFav(id) {
+                var url="/background_process_test/".concat(id);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    success: function(msg){
+                        alert( msg );
+                  }
+                });
+            }
+            
+        </script>
     </head>
 <body>
         <header>
@@ -108,13 +121,13 @@
                 </div>
                 <div class="unit2">
                     <form action="">
-                        <button><i class="fa fa-user" ></i></button>
+                        <button type="submit"><i class="fa fa-user" ></i></button>
                     </form>
                     <form action="">
-                        <button><i class="fa fa-shopping-cart" ></i></button>
+                        <button type="submit"><i class="fa fa-shopping-cart" ></i></button>
                     </form>
                     <form action="">
-                        <button><i class="fa fa-heart"></i></button>
+                        <button type="submit"><i class="fa fa-heart"></i></button>
                     </form>
                     <form action="" >
                         <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
@@ -160,6 +173,43 @@
         <div class="content">
             <div class="head2">
                 <p class="logo" ><b>S T Y L E U P</b></p>
+                <div style="margin-left: 50%;">
+                    <button onclick="document.getElementById('filter').style.display='block'" class="filter">Filter</button></p>
+                    <div id="filter" class="modal"  >
+                        
+                        <form action="/filter/" method="POST">
+                            <div class="pop-container"> 
+                                <div class="form" style="background-color: #eaeaea;">
+                                  <div class="abc">
+                                    <span onclick="document.getElementById('filter').style.display='none'" class="close" title="close modal">x</span>
+                                    <input type="button" onclick="javascript:mycolor()" value="Color" required>
+                                    <div id="color">
+                                        <input type="radio" name="color" value="red">Red<br>
+                                        <input type="radio" name="color" value="blue">Blue
+                                    </div>
+                                    <br>
+                                    <input type="button" onclick="javascript:mycategory()" value="Category" required>
+                                    <div id="category">
+                                        <input type="radio" name="category" value="men">Men <br>
+                                        <input type="radio" name="category" value="women">Women<br>
+                                        <input type="radio" name="category" value="kids" >Kids
+                                    </div>
+                                    <br>
+                                    <input type="button" onclick="javascript:mysize()" value="Size" required>
+                                    <div id="size">
+                                        <input type="radio" name="size" value="XS">XS <br>
+                                        <input type="radio" name="size" value="S">S<br>
+                                        <input type="radio" name="size" value="M" >M <br>
+                                        <input type="radio" name="size" value="L" >L <br>
+                                        <input type="radio" name="size" value="XL">XL <br>
+                                    </div>
+                                    <input type="submit" value="Apply">
+                                </div>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>    
         </div>
         <div class="container">
@@ -167,13 +217,42 @@
             <div class="shop-container">
                     <a href="/product/{{ i[1] }}"><img src="{{ url_for('static' ,filename=i[4]) }}" alt=""></a>
                     <div class="details-container">
-                        <a href=""><i class="fa fa-heart" style="float: right;"></i></a>
-                        <p>{{ i[2] }} &nbsp;&nbsp;{{ i[3] }}</p>
                         
+                            <button style="float: right;" onclick="AddToFav('{{ i[1] }}')"><i class="fa fa-heart" ></i></button></a>
+                            <p>{{ i[2] }} &nbsp;&nbsp;&#8377;{{ i[3] }}</p>
                     </div> 
                     <br>
                 </div>
             {% endfor %}
         </div>
     </body>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        function mycolor() {
+                document.getElementById('color').style.display="block";
+                document.getElementById('category').style.display="none";
+                document.getElementById('size').style.display="none";
+                documeent.getElementById('brands').style.display="none";
+                
+            }
+            function mycategory() {
+                document.getElementById('category').style.display="block";
+                document.getElementById('size').style.display="none";
+                document.getElementById('color').style.display="none";
+                documeent.getElementById('brands').style.display="none";
+                
+            }
+            function mysize() {
+                document.getElementById('size').style.display="block";
+                document.getElementById('category').style.display="none";
+                documeent.getElementById('brands').style.display="none";
+                document.getElementById('color').style.display="none";
+            }
+    </script>
 </html>

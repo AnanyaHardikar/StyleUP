@@ -7,9 +7,19 @@
 .shop-container{
     display: inline-block;
     width: 45%;
-    height: 100%;
     padding: 1%;
+    padding-bottom: 0;
     background-color: #eaeaea;
+    border: 10px solid white;
+}
+@media(max-width:819px){
+    .shop-container{
+        width: 100%;
+    }
+    .container{
+        margin-top: 20%;
+        
+    }
 }
 
 .shop-container a>img{
@@ -18,8 +28,104 @@
     height: 100%;
 }
 .details-container{
+    margin-top: 10%;
     font-weight: bold;
     font-size: large;
     padding-top: 1%;
     font-style: italic;
+
+}
+
+.modal {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    display: none;
+}
+  /* The Close Button */
+  .close {
+    /* Position it in the top right corner outside of the modal */
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .close:hover{
+    color: #c99947;
+  }
+  .pop-container {
+    padding: 16px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: 50%; /* half of you height */
+    width: 400px;
+    margin-left: -200px; 
+    z-index: 3;
+    }
+
+.form {
+    border: 10px solid #c99947;
+}
+@media(max-width:819px){
+    .pop-container{
+        width: 200px;
+    }
+    .modal{
+        width: 100%;
+    }
+    
+}
+.abc{
+    margin: 5%;
+}
+
+#color{
+    display: none;
+    margin-left: 50%;
+}
+#category{
+    display: none;
+    margin-left: 50%;
+}
+#size{
+    display: none;
+    margin-left: 50%;
+}
+input[type=button]{
+    border: none;
+    background-color: white;
+    width: 50%;
+}
+input[type=button]:hover{
+    color: #c99947;
+    border: 2pt dashed #c99947;
+}
+
+input[type=submit]{
+    border: none;
+    background-color: #c99947;
+    width: 50%;  
+}
+input[type=submit]:hover{
+    background-color: white;
+    color: #c99947;
+    border: 2pt dashed #c99947;
+}
+.filter{
+    margin-top: 7%;
+    background: transparent;
+    width: 40%;
+    height: 30%;
+    border: 1px dotted black;
+    float: right;
+}
+.filter:hover{
+    color: #c99947;
+    border: 2pt dashed #c99947;
 }

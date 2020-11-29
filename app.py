@@ -29,5 +29,34 @@ def product():
     mycursor.execute("select color, image from item_color where item_id=1001;")
     ONE = mycursor.fetchall()
     return render_template('product.html',data=ONE)
+
+@app.route('/shop/<category>')
+def process_shop(category):
+    query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+    mycursor.execute(query)
+    data=mycursor.fetchall()
+    return render_template("shop.html", data=data,count=6)
+
+@app.route('/add_to_wishlist/<item_id>', methods=["POST"])
+def process_wishlist(item_id):
+    return redirect(url_for('process_shop',category="menshirts"))
+
+@app.route('/product/<item_id>')
+def process_product(item_id):
+    print(item_id)
+    return render_template('product.html')
+
+@app.route('/background_process_test/<id>', methods=["POST"])
+def background_process_test(id):
+    print ("Hello ",id)
+    return ("Added Successfully")
+
+@app.route('/filter/',methods=["POST"])
+def filter():
+    color=request.form['color']
+    category=request.form['category']
+    print(color,category)
+    return render_template('blog.html')
+
 if __name__ == "__main__":
     app.run(debug=True)

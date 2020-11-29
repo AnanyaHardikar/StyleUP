@@ -51,7 +51,8 @@
         font-size: large;
         z-index: 1;
         width: 80%;
-        height: 6.5%;
+        height: 8%;
+        padding-top: 2%;
         margin-left: 9%;
         background-color: white;
     }
