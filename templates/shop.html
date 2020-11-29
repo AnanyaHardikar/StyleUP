@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/shop.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         
@@ -159,98 +160,20 @@
         <div class="content">
             <div class="head2">
                 <p class="logo" ><b>S T Y L E U P</b></p>
-                <div class="ctg">
-                    <a class="circle" href="men.html"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
-                    <a  class="circle" href="women.html"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
-                    <a class="circle" href="kids.html"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
+            </div>    
+        </div>
+        <div class="container">
+            {% for i in data %}
+            <div class="shop-container">
+                    <a href="/product/{{ i[1] }}"><img src="{{ url_for('static' ,filename=i[4]) }}" alt=""></a>
+                    <div class="details-container">
+                        <a href=""><i class="fa fa-heart" style="float: right;"></i></a>
+                        <p>{{ i[2] }} &nbsp;&nbsp;{{ i[3] }}</p>
+                        
+                    </div> 
+                    <br>
                 </div>
-            </div>
-
-            <div class="ele3">
-                <div class="slideshow-container">
-                    <div class="mySlides fade">
-                        <img class="slide_image"src="static/images/img8.jpg" style="width:100%">
-                    </div>
-                    <div class="mySlides fade">
-                        <img class="slide_image" src="static/images/img6.webp" style="width:100%">
-                    </div>
-                    <div class="mySlides fade">
-                        <img class="slide_image" src="static/images/img7.webp" style="width:100%">
-                    </div>
-                    <div class="mySlides fade">
-                        <img class="slide_image" src="static/images/img5.jpg" style="width:100%">
-                    </div>
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        <div class="ele4">
-             <p class="logo" id="logosmall"><b>S T Y L E U P</b></p>
-            <div class="vl"></div>
-            <blockquote>Fashion is not necessarily about labels. It's not about brands. It's about something else that comes from within you!
-            </blockquote>
-        </div>
-        <div class="head2">
-            <table class="brand-display" cellspacing="10">
-                <tr>
-                    <td class="display" colspan="2" ><a href="#" ><img src="static/images/img1.jpg" style="width:100%;height:60%;"><p style="margin-top:-3%;
-    margin-left:50%;" class="price">$150</p></a></td>
-                    <td class="display" rowspan="2"><a href="#" ><img src="static/images/img2.jpg" style="width:100%;height:75%"><p style="margin-top:-3%;
-    margin-left:15%;" class="price">$300</p></a></td>
-                  </tr>
-                  <tr>
-                    <td class="display"><a href="#" ><img src="static/images/img3.webp" style="width:100%;height:30%;"><p style="margin-top:-3%;
-    margin-left:20%;" class="price">$599</p></a></td>
-                    <td class="display"><a href="#" ><img src="static/images/img4.webp" style="width:100%;height:30%"><p style="margin-top:-3%;
-    margin-left:20%;" class="price">$219</p></a></td>
-                  </tr>
-            </table>
-        </div>
-
-        <div style="margin-left: 10%;margin-right: 10%; height: 100%;">
-                <p class="rectangle rectangle-responsive"><i class="fa fa-paper-plane"></i> Free shipping world wide</p>
-                <p class="rectangle rectangle-responsive"><i class="fa fa-refresh"></i> Money back guarentee</p>
-                <p class="rectangle rectangle-responsive"><i class="fas fa-headset"></i> Online support 24/7</p>
-        </div>
-        <footer>
-
-        </footer>
     </body>
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-        var slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-          var i;
-          var slides = document.getElementsByClassName("mySlides");
-          var dots = document.getElementsByClassName("dot");
-          if (n > slides.length) {slideIndex = 1}
-          if (n < 1) {slideIndex = slides.length}
-          for (i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";
-          }
-          for (i = 0; i < dots.length; i++) {
-              dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";
-          dots[slideIndex-1].className += " active";
-        }
-
-        </script>
 </html>
