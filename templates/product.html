@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Style UP-Men</title>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/product.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <link href='https://fonts.googleapis.com/css?family=Alatsi' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Alike' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Coustard' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+<body>
+<header>
+            <div class="navbar">
+                <div class="unit1">
+                    <a href="/"><button class="nav_item"> Home</button></a>
+                    <button class="nav_item">Category
+                        <ul class="submenu">
+                            <li><a href="/men/" class="nav_item">Men</a></li>
+                            <li><a href="/women/" class="nav_item">Women</a></li>
+                            <li><a href="/kids/" class="nav_item">Kids</a></li>
+                        </ul>
+                    </button>
+                    <a href="/blog/"><button class="nav_item">Blog</button></a>
+                </div>
+                <div class="unit2">
+                    <form action="">
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="" >
+                        <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <ul>
+                    <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li> Category
+                            <ul class="submenu">
+                                <li><a href="/men/">Men</a></li>
+                                <li><a href="/women/" >Women</a></li>
+                                <li><a href="/kids/" >Kids</a></li>
+                            </ul>
+                    </li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+            </div>
+            <span class="sidemenu-content" onclick="openNav()">&#9776; </span>
+                <div class="unit3">
+                    <form action="">
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="">
+
+                        <button type="submit" style="float: right;"><i class="fa fa-search" ></i></button>
+                        <div class="unit4">
+                            <input type="text" name="search" placeholder="Search here.." size="13"  style="border:none;outline:none;">
+                        </div>
+                    </form>
+                </div>
+        </header>
+        <br>
+        <div class="content">
+            <div class="head2">
+                <p class="logo"><b>S T Y L E U P</b></p>
+                <div class="ctg">
+
+                    <a class="circle" href="/men/"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
+                    <a class="circle" href="/women/"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
+                    <a class="circle" href="/kids/"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
+                </div>
+            </div>
+        </div>
+    <br><br><br>
+        <div class="container">
+            <div class="image_display">
+                <img id="myImg" src="{{ url_for('static',filename='images/men_shirt_roadster_blue.webp') }}">
+            </div>
+            <div class="description">
+                <p style="font-family: 'Alatsi';font-size:28px;" >Roadster</p>
+                <p style="font-family: 'Alike';font-size:25px;">Rs.699 &nbsp<SPAN STYLE="text-decoration:line-through;color:#a3a375;font-size:20px">Rs.1399</SPAN></p>
+                <p style="font-family: 'Alike';font-size:18px;color:#ff751a;"><b>50% OFF</b></p>
+                <p style="color:#03a685;font-size:15px;font-family: 'Coustard'">inclusive of all taxes</p>
+                <p style="font-family: 'Alike';font-size:25px;" >SELECT SIZE</p>
+                <ul id="menu">
+                  <li ><span>XS</span></li>
+                  <li ><span>S</span></li>
+                  <li><span>M</span></li>
+                  <li><span>L</span></li>
+                    <li><span>XL</span></li>
+                </ul>
+                <p style="font-family: 'Alike';font-size:25px;" >COLOR</p>
+                <div class="colors">
+                    {% for i in data %}
+                        <button style="background-color:{{i[0]}};" id="choice" value={{ i[1]}} onclick="after({{i}})"></button>
+                    {% endfor %}
+                </div>
+                <br>
+                <button id="add" class="button1"><i class="fa fa-shopping-bag"></i>&nbsp ADD TO BAG</button> <button id="add" class="button2"><i class="fa fa-heart"></i>&nbsp WISHLIST</button>
+                <p style="font-size:20px;font-family: 'Coustard'">Product Description:</p>
+            </div>
+        </div>
+    </body>
+<script>
+    function after(a)
+    {
+           var path="../static/images/";
+          document.getElementById('myImg').src=path+a;
+
+    }
+
+</script>
+</html>
