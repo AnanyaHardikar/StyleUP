@@ -4,7 +4,7 @@ from flask import Flask, render_template,request,session,redirect,url_for
 mydb = mysql.connector.connect(
   host="127.0.0.1",
   user="root",
-  passwd="root123",
+  passwd="",
   database="styleup"
 )
 mycursor=mydb.cursor()
@@ -24,9 +24,9 @@ def blog():
 @app.route('/men/')
 def men():
     return render_template('men.html')
-@app.route('/product/')
-def product():
-    mycursor.execute("select color, image from item_color where item_id=1001;")
+@app.route('/product/<item_id>')
+def product(item_id):
+    mycursor.execute("select color, image from item_color where item_id=%s"%item_id)
     ONE = mycursor.fetchall()
     return render_template('product.html',data=ONE)
 
