@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Style UP</title>
+        <title>Style UP-Blog</title>
         <meta name="viewport" content="width=device-width">
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/blog.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        
+
     </head>
 <body>
-        <header>
+<header>
             <div class="navbar">
                 <div class="unit1">
                     <a href="/"><button class="nav_item"> Home</button></a>
@@ -74,5 +76,46 @@
                 </div>
         </header>
         <br>
+        <div class="content">
+            <div class="head2">
+                <p class="logo"><b>S T Y L E U P</b></p>
+                <div class="ctg">
+
+                    <a class="circle" href="/men/"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
+                    <a class="circle" href="/women/"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
+                    <a class="circle" href="/kids/"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
+                </div>
+            </div>
+        </div>
+        <div class="ads">
+            <figure><img src="{{ url_for('static',filename='images/women_advertisement.jpg') }}"></figure>
+        </div>
+
+        <div>
+            <h2 style="background-color:#c99947;width:290px;height:30px;margin-top:30%;text-align:center;float:right;margin-right:-19%">NEW COLLECTION</h2>
+        </div>
+
+        <div class="blog1">
+           <img src="{{ url_for('static',filename='images/women_kurtis.jpg') }}">
+        </div>
+        <div>
+            <h2 style="background-color:#c99947;width:60px;height:60px;text-align:center;float:left;margin-left:-54%;margin-top:-1%;">Nov 11</h2>
+        </div>
+        <div><p style="margin-top:53%;margin-left:15%;margin-right:10%;color:grey;font-size:18px;">Shalwars are trousers which are atypically wide
+            at the waist but which narrow to a cuffed bottom. They are held up by a drawstring or elastic belt,
+            which causes them to become pleated around the waist.The trousers can be wide and baggy, or they can be cut
+            quite narrow, on the bias. Shalwars have been traditionally worn in a wide region which includes Eastern Europe,
+            West Asia,Central Asia, and South Asia. The kameez is a long shirt or tunic.The side seams are left open below
+            the waist-line (the opening known as the chaak[note 1]), which gives the wearer greater freedom of movement.
+            The kameez is usually cut straight and flat; older kameez use traditional cuts; modern kameez are more likely
+            to have European-inspired set-in sleeves. The kameez may have a European-style collar, a Mandarin collar, or
+            it may be collarless; in the latter case, its design as a women's garment is similar to a kurta. The combination
+            garment is sometimes called salwar kurta, salwar suit, or Punjabi suit The shalwar and kameez were introduced
+            into South Asia after the arrival of Muslims in the north in the 13th century: at first worn by Muslim women,
+            their use gradually spread, making them a regional style, especially in the historical Punjab region.
+            The shalwar-kameez is a widely-worn,and national dress,of Pakistan.
+            It is also widely worn by men in Afghanistan, and by women and some men in the Punjab region of India,
+            from which it has been adopted by women throughout India, and more generally in South Asia.</p>
+        <p style="float:right;margin-right:10%;margin-top:-1%;font-size:20px;">By- Sadhana Bhat</p></div>
     </body>
 </html>
