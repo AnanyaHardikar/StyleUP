@@ -70,15 +70,20 @@ def logout():
     session.pop('email', None)
 
     return render_template('login.html')
+   return render_template('home.html')
+
 @app.route('/home/')
 def home():
     return render_template('home.html')
+
 @app.route('/blog/')
 def blog():
     return render_template('blog.html',)
+
 @app.route('/men/')
 def men():
     return render_template('men.html')
+
 @app.route('/product/<item_id>')
 def product(item_id):
     mycursor.execute("select color, image from item_color where item_id=%s"%item_id)
@@ -106,12 +111,33 @@ def background_process_test(id):
     print ("Hello ",id)
     return ("Added Successfully")
 
+@app.route('/remove_fav/<id>',methods=['POST'])
+def remove_fav(id):
+    print(id)
+    return ("Removed Successfully")
+
 @app.route('/filter/',methods=["POST"])
 def filter():
     color=request.form['color']
     category=request.form['category']
     print(color,category)
     return render_template('blog.html')
+
+@app.route('/wishlist/')
+def wishlist():
+    category='menshirts'
+    query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+    mycursor.execute(query)
+    data=mycursor.fetchall()
+    return render_template('wishlist.html' ,data=data)
+
+@app.route('/cart/')
+def cart():
+    category='menshirts'
+    query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+    mycursor.execute(query)
+    data=mycursor.fetchall()
+    return render_template('cart.html',data=data)
 
 if __name__ == "__main__":
     app.run(debug=True)

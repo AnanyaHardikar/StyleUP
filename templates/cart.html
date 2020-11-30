@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Style UP|Cart</title>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/cart.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        
+    </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <div class="unit1">
+                    <a href="/"><button class="nav_item"> Home</button></a>
+                    <button class="nav_item">Category
+                        <ul class="submenu">
+                            <li><a href="/men/" class="nav_item">Men</a></li>
+                            <li><a href="/women/" class="nav_item">Women</a></li>
+                            <li><a href="/kids/" class="nav_item">Kids</a></li>
+                        </ul>
+                    </button>
+                    <a href="/blog/"><button class="nav_item">Blog</button></a>
+                </div>
+                <div class="unit2">
+                    <form action="">
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="" >
+                        <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <ul>
+                    <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li> Category
+                            <ul class="submenu">
+                                <li><a href="/men/">Men</a></li>
+                                <li><a href="/women/" >Women</a></li>
+                                <li><a href="/kids/" >Kids</a></li>
+                            </ul>
+                    </li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+            </div>
+            <span class="sidemenu-content" onclick="openNav()">&#9776; </span>
+                <div class="unit3">
+                    <form action="">
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="">
+
+                        <button type="submit" style="float: right;"><i class="fa fa-search" ></i></button>
+                        <div class="unit4">
+                            <input type="text" name="search" placeholder="Search here.." size="13"  style="border:none;outline:none;">
+                        </div>
+                    </form>
+                </div>
+        </header>
+        <br>
+        <div class="content">
+            <div class="head2">
+                <p class="logo"><b>S T Y L E U P</b></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="cart-container " >
+                <p style="display: inline;">My shopping bag</p><p id="items" style="display: inline;"></p><p style="float: right;margin-top: 0;" id="sum"></p>
+            </div>
+            {% for i in data %}
+            <ul style="display: inline;">
+                <li id="{{ i[1] }}" class="shop-container">
+                    <a href="/product/{{ i[1] }}"><img src="{{ url_for('static' ,filename=i[4]) }}" alt=""></a>
+                    <div class="details-container">
+                        <button style="float: right;" onclick="RemoveFav('{{ i[1] }}')"><b style="font-size: x-large;">x</b></button></a>
+                        <p>{{ i[2] }}</p>
+                        <p id="para">&#8377;{{ i[3] }}<br></p> 
+                        <p>Color<br></p> 
+                        <p>Size <br></p>
+                    </div> 
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </body>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        function RemoveFav(id) {
+            var node=document.getElementById(id);
+            var parent=node.parentNode;
+            node.parentNode.removeChild(node);
+            parent.style.padding=0;
+            var res=0;
+            var items=0;
+            $('.details-container p#para').each(function(){
+                var inp=$(this).text();
+                var num=inp.substr(1);
+                res+=parseInt(num);
+                items+=1;
+            })
+            document.getElementById('items').innerHTML="("+items+" items)";
+            document.getElementById('sum').innerHTML="Total="+res;
+            var url="/remove_fav/".concat(id);
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function(msg){
+                    alert( msg );
+              }
+            });
+
+        }
+        var res=0;
+        var items=0;
+        $('.details-container p#para').each(function(){
+            var inp=$(this).text();
+            var num=inp.substr(1);
+            res+=parseInt(num);
+            items+=1;
+        })
+        document.getElementById('items').innerHTML="("+items+" items)";
+        document.getElementById('sum').innerHTML="Total="+res;
+    </script>
+</html>

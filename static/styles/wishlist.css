@@ -1,0 +1,42 @@
+.container{
+    clear: left;
+    margin-top: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
+
+.shop-container{
+    display: inline-block;
+    width: 25%;
+    padding: 1%;
+    padding-bottom: 0;
+    background-color: #eaeaea;
+    border: 10px solid white;
+    list-style-type: none;
+}
+
+.shop-container a>img{
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.details-container{
+    margin-top: 10%;
+    font-weight: bold;
+    font-size: large;
+    padding-top: 1%;
+    font-style: italic;
+}
+
+@media(max-width:819px){
+    .shop-container{
+        width: 100%;
+        
+    }
+    .container{
+        margin-top: 20%;
+        margin-left:0 ;
+    }
+}
