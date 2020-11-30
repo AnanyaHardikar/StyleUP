@@ -81,6 +81,8 @@
         <div class="content">
             <div class="head2">
                 <p class="logo"><b>S T Y L E U P</b></p>
+                <form action="/logout/">
+                <button type="submit" style="margin-top: 50%;">logout</button></form>
             </div>
         </div>
         <div class="container">
@@ -101,6 +103,24 @@
                 </li>
             </ul>
             {% endfor %}
+        </div>
+        <div class="checkout-container">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname">
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" >
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" >
+
+
         </div>
     </body>
     <script>

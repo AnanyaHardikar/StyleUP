@@ -1,19 +1,21 @@
 import mysql.connector
 import json
-from flask import Flask, render_template,request,session,redirect,url_for
+from flask import Flask, render_template,request,session,redirect,url_for,Response
 mydb = mysql.connector.connect(
   host="127.0.0.1",
   user="root",
-  passwd="root123",
+  passwd="",
   database="styleup"
 )
 mycursor=mydb.cursor()
 app=Flask(__name__)
 app.secret_key="secret key"
 
+
+url=""
 @app.route('/')
 def index():
-        return render_template('login.html')
+    return render_template('home.html')
 
 @app.route('/submit', methods=['POST'])
 def signUp_submit():
@@ -54,7 +56,8 @@ def check():
             if(d[0][0]==email and d[0][2]==psw):
                 session['email']=email
                 if 'email' in session:
-                    return home()
+                    global url
+                    return redirect(url_for(url))
                 else:
                     return render_template('login.html')
             else:
@@ -65,12 +68,10 @@ def check():
 
 
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     session.pop('email', None)
-
-    return render_template('login.html')
-   return render_template('home.html')
+    return redirect(url_for('index'))
 
 @app.route('/home/')
 def home():
@@ -125,19 +126,35 @@ def filter():
 
 @app.route('/wishlist/')
 def wishlist():
-    category='menshirts'
-    query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
-    mycursor.execute(query)
-    data=mycursor.fetchall()
-    return render_template('wishlist.html' ,data=data)
+    if 'email' in session: 
+        category='menshirts'
+        query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+        mycursor.execute(query)
+        data=mycursor.fetchall()
+        return render_template('wishlist.html' ,data=data)
+    else:
+        global url
+        url="wishlist"
+        return render_template('login.html')
+
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"]="no-cache,no-store,must-revalidate"
+    return response
 
 @app.route('/cart/')
 def cart():
-    category='menshirts'
-    query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
-    mycursor.execute(query)
-    data=mycursor.fetchall()
-    return render_template('cart.html',data=data)
+    if 'email' in session: 
+        category='menshirts'
+        query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+        mycursor.execute(query)
+        data=mycursor.fetchall()
+        return render_template('cart.html' ,data=data)
+    else:
+        global url
+        url="cart"
+        return render_template('login.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
