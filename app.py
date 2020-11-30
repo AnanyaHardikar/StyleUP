@@ -4,7 +4,7 @@ from flask import Flask, render_template,request,session,redirect,url_for
 mydb = mysql.connector.connect(
   host="127.0.0.1",
   user="root",
-  passwd="",
+  passwd="root123",
   database="styleup"
 )
 mycursor=mydb.cursor()
@@ -13,13 +13,68 @@ app.secret_key="secret key"
 
 @app.route('/')
 def index():
-   return render_template('home.html')
+        return render_template('login.html')
+
+@app.route('/submit', methods=['POST'])
+def signUp_submit():
+    s_uname = request.form['s_uname']
+    s_email = request.form['s_email']
+    s_password = request.form['s_psw']
+    if s_uname and s_email and s_password and request.method == 'POST':
+        query = "SELECT * FROM customers WHERE email_id='%s'" % s_email
+        query1 = "INSERT INTO customers VALUES(%s, %s, %s)"
+        val = (s_email,s_uname,s_password)
+        mycursor.execute(query)
+        d = mycursor.fetchall()
+        d = str(d).strip("[](),''")
+        print(d)
+        if (d == ''):
+            mycursor.execute(query1, val)
+            print(s_email)
+            mydb.commit()
+            return render_template("login.html", data="SUCCESSFUL")
+
+        else:
+            return render_template("login.html", data="email already exist")
+
+
+    return render_template('home.html')
+@app.route('/check', methods=['POST'])
+def check():
+    psw = request.form['psw']
+    email = request.form['email']
+    if psw and email and request.method == 'POST':
+        query1= "SELECT * FROM customers WHERE email_id='%s'" %email
+        val=(email,psw)
+        mycursor.execute(query1)
+        d = mycursor.fetchall()
+        if(str(d).strip("[](),'")==''):
+            return render_template("login.html", data1="Invalid Email")
+        else:
+            if(d[0][0]==email and d[0][2]==psw):
+                session['email']=email
+                if 'email' in session:
+                    return home()
+                else:
+                    return render_template('login.html')
+            else:
+                return render_template("login.html", data1="Please check the    password")
+
+
+
+
+
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+
+    return render_template('login.html')
 @app.route('/home/')
 def home():
     return render_template('home.html')
 @app.route('/blog/')
 def blog():
-
     return render_template('blog.html',)
 @app.route('/men/')
 def men():
