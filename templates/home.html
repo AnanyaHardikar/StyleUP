@@ -116,10 +116,19 @@
                     <form action="/wishlist/">
                         <button><i class="fa fa-heart"></i></button>
                     </form>
-                    <form action="" >
-                        <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+
+                    <input type="text" placeholder="Search.." id="myInput">
+                      <button onclick="filterFunction();myFunction();" class="dropbtn"><i class="fa fa-search"></i></button>
+                      <div id="myDropdown" class="dropdown-content">
+                          <a href="/shop/menshirts">Men Shirts</a>
+                          <a href="#">Men Sweaters</a>
+                          <a href="#">Men Trousers</a>
+                          <a href="#">Men suits</a>
+                          <a href="#">Men Jeans</a>
+                          <a href="#">Men Kurtas and Kurtis</a>
+                          <a href="#">Boys suits</a>
+                      </div>
+
                 </div>
             </div>
             <div id="mySidenav" class="sidenav">
@@ -162,9 +171,9 @@
             <div class="head2">
                 <p class="logo" ><b>S T Y L E U P</b></p>
                 <div class="ctg">
-                    <a class="circle" href="men.html"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
-                    <a  class="circle" href="women.html"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
-                    <a class="circle" href="kids.html"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
+                    <a class="circle" href="/men/"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
+                    <a  class="circle" href="/women/"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
+                    <a class="circle" href="/kids/"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
                 </div>
             </div>
 
@@ -254,5 +263,24 @@
           dots[slideIndex-1].className += " active";
         }
 
+        function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+                function filterFunction() {
+                  var input, filter, ul, li, a, i;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  div = document.getElementById("myDropdown");
+                  a = div.getElementsByTagName("a");
+                  for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
+                    } else {
+                      a[i].style.display = "none";
+                    }
+                  }
+                }
         </script>
 </html>

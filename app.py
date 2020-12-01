@@ -4,7 +4,7 @@ from flask import Flask, render_template,request,session,redirect,url_for,Respon
 mydb = mysql.connector.connect(
   host="127.0.0.1",
   user="root",
-  passwd="",
+  passwd="root123",
   database="styleup"
 )
 mycursor=mydb.cursor()
@@ -72,10 +72,6 @@ def check():
                 return render_template("login.html", data1="Please check the    password")
 
 
-
-
-
-
 @app.route('/logout/')
 def logout():
     session.pop('email', None)
@@ -92,6 +88,14 @@ def blog():
 @app.route('/men/')
 def men():
     return render_template('men.html')
+
+@app.route('/women/')
+def women():
+    return render_template('women.html')
+
+@app.route('/kids/')
+def kids():
+    return render_template('kids.html')
 
 @app.route('/product/<item_id>')
 def product(item_id):
@@ -170,7 +174,7 @@ def cart():
 def profile():
     if 'email' in session: 
         
-        query="SELECT user_name,email_id FROM styleup.customers"
+        query="SELECT name,email_id FROM styleup.customers"
         mycursor.execute(query)
         data=mycursor.fetchall()
         return render_template('profile.html' ,data=data)
