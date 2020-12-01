@@ -7,12 +7,15 @@
 }
 .checkout-container{
     position: absolute;
-    margin-top: 15%;
+    margin-top: 8%;
     margin-left: 30%;
     display: inline-block;
     width: 35%;
     background-color: #eaeaea;
     border: 5px solid white;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 8px;
 }
 .shop-container{
     display: inline-block;
@@ -25,19 +28,42 @@
     list-style-type: none;
 }
 .icon-container {
+    margin-left: 5%;
     margin-bottom: 20px;
     padding: 7px 0;
     font-size: 24px;
   }
+  i.fa {
+    -webkit-animation: show 1s 1;
+    /* any other properties to override from FontAwesome's default .fa rule */
+  }
+  @-webkit-keyframes show {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 .checkout-container input[type=text] {
     width: 80%;
+    margin-left: 5%;
     margin-bottom: 20px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 3px;
   }
-  
+  .checkout-container input[type=submit] {
+  background-color:black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  margin-left: 30%;
+}
+
+.checkout-container input[type=submit]:hover {
+  opacity: 0.8;
+}
   label {
+      margin-left: 5%;
     margin-bottom: 10px;
     display: block;
   }
@@ -61,21 +87,29 @@
 
 @media(max-width:819px){
     .shop-container{
-        width: 100%;
+        width: 90%;
         float: none;
     }
     .container{
         margin-top: 20%;
         margin-left:0 ;
         float: none;
-        width: 100%;
+        width: 80%;
     }
     
     .checkout-container{
         float: none;
-        width: 100%;
+        width: 70%;
         margin-left: 10%;
         margin-top: 0;
+    }
+    .checkout-container input[type=submit]{
+        margin-left: 0;
+        width: 100%;
+    }
+    table,td,th{
+        padding: 0;
+        margin: 0;
     }
 }
 .cart-container{
@@ -87,4 +121,42 @@
     color: #c99947;
     background-color: white;
     border: 10px solid #eaeaea;
+}
+.invoice-container{
+    display: none;
+    background-color:white;
+    width: 80%;
+    top: 40%;
+    margin-left: 9%;
+    position: absolute;
+    z-index: 0;
+    border:5px solid #c99947;
+}
+.invoice-container p{
+    margin: 5px;
+}
+.close {
+    /* Position it in the top right corner outside of the modal */
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .close:hover{
+    color: #c99947;
+  }
+
+table,td,th{
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+.table-content{
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
 }

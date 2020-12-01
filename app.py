@@ -13,9 +13,14 @@ app.secret_key="secret key"
 
 
 url=""
+category=""
 @app.route('/')
 def index():
     return render_template('home.html')
+
+@app.route('/login/')
+def login():
+    return render_template('login.html')
 
 @app.route('/submit', methods=['POST'])
 def signUp_submit():
@@ -56,8 +61,11 @@ def check():
             if(d[0][0]==email and d[0][2]==psw):
                 session['email']=email
                 if 'email' in session:
-                    global url
-                    return redirect(url_for(url))
+                    global url,category
+                    if category=="":
+                        return redirect(url_for(url))
+                    else:
+                        return redirect(url_for(url,category=category))
                 else:
                     return render_template('login.html')
             else:
@@ -100,17 +108,20 @@ def process_shop(category):
 
 @app.route('/add_to_wishlist/<item_id>', methods=["POST"])
 def process_wishlist(item_id):
-    return redirect(url_for('process_shop',category="menshirts"))
+    if 'email' in session:
+        print ("Hello ",item_id)
+        return ("Added Successfully")
+    else:
+        global url,category
+        url='process_shop'
+        category='menshirts'
+        return ('/login/')
 
 @app.route('/product/<item_id>')
 def process_product(item_id):
     print(item_id)
     return render_template('product.html')
 
-@app.route('/background_process_test/<id>', methods=["POST"])
-def background_process_test(id):
-    print ("Hello ",id)
-    return ("Added Successfully")
 
 @app.route('/remove_fav/<id>',methods=['POST'])
 def remove_fav(id):
@@ -155,6 +166,18 @@ def cart():
         url="cart"
         return render_template('login.html')
 
+@app.route('/profile/')
+def profile():
+    if 'email' in session: 
+        
+        query="SELECT user_name,email_id FROM styleup.customers"
+        mycursor.execute(query)
+        data=mycursor.fetchall()
+        return render_template('profile.html' ,data=data)
+    else:
+        global url
+        url="profile"
+        return render_template('login.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

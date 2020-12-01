@@ -11,12 +11,17 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type=text/javascript>
             function AddToFav(id) {
-                var url="/background_process_test/".concat(id);
+                var url="/add_to_wishlist/".concat(id);
                 $.ajax({
                     type: "POST",
                     url: url,
                     success: function(msg){
-                        alert( msg );
+                        if (msg=="Added Successfully"){
+                            alert(msg);
+                        }
+                        else{
+                            window.location.href='/login/';
+                        }
                   }
                 });
             }

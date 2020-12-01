@@ -85,7 +85,10 @@
                 <button type="submit" style="margin-top: 50%;">logout</button></form>
             </div>
         </div>
-        <div class="container">
+        <div class="container cart-container" id="cart-container" style="display: none;width: 40%;text-align: center;vertical-align: middle;">
+            
+        </div>
+        <div class="container" id="container">
             <div class="cart-container " >
                 <p style="display: inline;">My shopping bag</p><p id="items" style="display: inline;"></p><p style="float: right;margin-top: 0;" id="sum"></p>
             </div>
@@ -104,8 +107,8 @@
             </ul>
             {% endfor %}
         </div>
-        <div class="checkout-container">
-            <h3>Payment</h3>
+        <div class="checkout-container" id="checkout-container">
+            <h3 style="margin-left: 40%;">Payment</h3>
             <label for="fname">Accepted Cards</label>
             <div class="icon-container">
               <i class="fa fa-cc-visa" style="color:navy;"></i>
@@ -113,15 +116,70 @@
               <i class="fa fa-cc-mastercard" style="color:red;"></i>
               <i class="fa fa-cc-discover" style="color:orange;"></i>
             </div>
-            <label for="cname">Name on Card</label>
-            <input type="text" id="cname" name="cardname">
-            <label for="ccnum">Credit card number</label>
-            <input type="text" id="ccnum" name="cardnumber" >
-            <label for="expmonth">Exp Month</label>
-            <input type="text" id="expmonth" name="expmonth" >
-
-
+            
+                <label for="cname">Name on Card</label>
+                <input type="text" id="cname" name="cardname" placeholder="Name on card">
+                <label for="ccnum">Credit card number</label>
+                <input type="text" id="ccnum" name="cardnumber" placeholder="Card number">
+                <label for="expdate">Exp Date</label>
+                <input type="text" id="expdate" name="expdate" placeholder="4/2021">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter 3 digit CVV on card">
+                <label for="amount">Amount to be paid &#8377;</label>
+                <input type="text" id="amount" disabled>
+                <h3 style="margin-left: 30%;">Billing Address</h3>
+                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Enter full name">
+                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                <input type="text" id="email" name="email" placeholder="Enter email id">
+                <label for="adr"><i class="fa fa-address-card"></i> Address</label>
+                <input type="text" id="adr" name="address" placeholder="Enter address">
+                <label for="city"><i class="fa fa-institution"></i> City</label>
+                <input type="text" id="city" name="city" placeholder="Enter city">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="Enter state">
+                <label for="zip">Pincode</label>
+                <input type="text" id="zip" name="zip" placeholder="Enter 6 digit pincode">
+                <input type="submit" onclick="openInvoice()" value="Continue to checkout" class="btn">
         </div>
+            <div class="invoice-container" id="invoice">
+                <span onclick="document.getElementById('invoice').style.display='none'" class="close" title="close invoice">x</span>
+                <p style="text-align: center;"><b>INVOICE</b></p>
+                <div style="float: right; margin-right: 10%;">
+                    <div class="head2">
+                        <p class="logo"><b>S T Y L E U P</b></p>
+                    </div>
+                </div>
+                <div style="float: left; margin-left: 10%;">
+                    <p id="name"></p>
+                    <p id="email-id"></p>
+                    <p id="address"></p>
+                    <p id="city1"></p>
+                    <p id="state1"></p>
+                    <p id="pincode"></p>
+                </div>
+                <table class="table-content">
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Cost</th>    
+                    </tr>
+                    {% for i in data %}
+                    {% set rowid='table' %}
+                    {% set id=i[1] | string() %}
+                    {% set rowid=rowid+id %}
+                    <tr id="{{ rowid }}">
+                        <td>{{ i[1] }}</td>
+                        <td>&#8377;{{ i[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div style="float: right;margin-right: 10%;">
+                    <p id="subtotal"></p>
+                    <p id="tax"></p>
+                    <p id="total" style="font-size: larger;"></p>
+                </div>
+            </div>
+        
     </body>
     <script>
         function openNav() {
@@ -131,11 +189,38 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+        function openInvoice(){
+            var name=document.getElementById('fname').value;
+            var email=document.getElementById('email').value;
+            var addr=document.getElementById('adr').value;
+            var city=document.getElementById('city').value;
+            var state=document.getElementById('state').value;
+            var pin=document.getElementById('zip').value;
+            document.getElementById('name').innerHTML=name;
+            document.getElementById('email-id').innerHTML=email;
+            document.getElementById('address').innerHTML=addr;
+            document.getElementById('city1').innerHTML=city;
+            document.getElementById('state1').innerHTML=state;
+            document.getElementById('pincode').innerHTML=pin;
+
+
+            var node=document.getElementById('invoice');
+            node.style.display='block';
+            document.getElementById('container').remove();
+            document.getElementById('checkout-container').remove();
+            var info=document.getElementById('cart-container');
+            info.innerHTML="No items in cart";
+            info.style.display='block';
+        }
         function RemoveFav(id) {
             var node=document.getElementById(id);
             var parent=node.parentNode;
             node.parentNode.removeChild(node);
             parent.style.padding=0;
+
+            var tableid="table".concat(id);
+            document.getElementById(tableid).remove();
+
             var res=0;
             var items=0;
             $('.details-container p#para').each(function(){
@@ -146,6 +231,10 @@
             })
             document.getElementById('items').innerHTML="("+items+" items)";
             document.getElementById('sum').innerHTML="Total="+res;
+            document.getElementById('amount').value=res;
+            document.getElementById('subtotal').innerHTML="Sub total:"+res;
+            document.getElementById('tax').innerHTML='Tax:100';
+            document.getElementById('total').innerHTML='Total:'+(res+100);
             var url="/remove_fav/".concat(id);
             $.ajax({
                 type: "POST",
@@ -166,5 +255,9 @@
         })
         document.getElementById('items').innerHTML="("+items+" items)";
         document.getElementById('sum').innerHTML="Total="+res;
+        document.getElementById('amount').value=res;
+        document.getElementById('subtotal').innerHTML="Sub total:"+res;
+        document.getElementById('tax').innerHTML='Tax:100';
+        document.getElementById('total').innerHTML='Total:'+(res+100);
     </script>
 </html>
