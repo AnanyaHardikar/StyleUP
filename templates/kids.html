@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Style UP-Men</title>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/men.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    </head>
+<body>
+<header>
+            <div class="navbar">
+                <div class="unit1">
+                    <a href="/home/"><button class="nav_item"> Home</button></a>
+                    <button class="nav_item">Category
+                        <ul class="submenu">
+                            <li><a href="/men/" class="nav_item">Men</a></li>
+                            <li><a href="/women/" class="nav_item">Women</a></li>
+                            <li><a href="/kids/" class="nav_item">Kids</a></li>
+                        </ul>
+                    </button>
+                    <a href="/blog/"><button class="nav_item">Blog</button></a>
+                </div>
+                <div class="unit2">
+                    <form action="">
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="" >
+                        <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <ul>
+                    <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li> Category
+                            <ul class="submenu">
+                                <li><a href="/men/">Men</a></li>
+                                <li><a href="/women/" >Women</a></li>
+                                <li><a href="/kids/" >Kids</a></li>
+                            </ul>
+                    </li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+            </div>
+            <span class="sidemenu-content" onclick="openNav()">&#9776; </span>
+                <div class="unit3">
+                    <form action="">
+                        <button><i class="fa fa-user" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-shopping-cart" ></i></button>
+                    </form>
+                    <form action="">
+                        <button><i class="fa fa-heart"></i></button>
+                    </form>
+                    <form action="">
+
+                        <button type="submit" style="float: right;"><i class="fa fa-search" ></i></button>
+                        <div class="unit4">
+                            <input type="text" name="search" placeholder="Search here.." size="13"  style="border:none;outline:none;">
+                        </div>
+                    </form>
+                </div>
+        </header>
+        <br>
+        <div class="content">
+            <div class="head2">
+                <p class="logo"><b>S T Y L E U P</b></p>
+                <div class="ctg">
+
+                    <a class="circle" href="/men/"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
+                    <a class="circle" href="/women/"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
+                    <a class="circle" href="/kids/"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
+                </div>
+            </div>
+
+        <div class="container2">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                  <img class="image_height"src="../static/images/kids_slide1.jpg" style="width:100%;height:570px;">
+                </div>
+
+                <div class="mySlides fade">
+                  <img class="image_height"  src="../static/images/kids_slide4.jpg" style="width:100%;height:570px;">
+                </div>
+
+                <div class="mySlides fade">
+                  <img class="image_height"  src="../static/images/kids_slide3.jpg" style="width:100%;height:570px;">
+                </div>
+
+                <div class="mySlides fade">
+                  <img class="image_height"  src="../static/images/kids_slide2.jpg" style="width:100%;height:570px;">
+                </div>
+
+                </div>
+                <br>
+
+                <div style="text-align:center">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+        </div>
+            <div class="container3">
+                <p><b>CATEGORIES TO BAG</b></p>
+            </div >
+        <div class="container4">
+            <div class="polaroid">
+                <p style="font-family: 'Lucida Console', Courier, monospace;font-size:120%;"><b>Boys</b></p>
+                <a href="#" title="Shirts">
+                    <img src="../static/images/boys_category1.jpg" alt="Santorini"/>
+                </a>
+                <a href="#" title="Sweaters">
+                    <img  src="../static/images/boys_category2.jpg" alt="Santorini" title="Sweaters" />
+                </a>
+                <a href="#" title="Suits">
+                    <img  src="../static/images/boys_category3.jfif" alt="Santorini" title="Suits" /></a>
+            </div>
+            <p style="font-family: 'Lucida Console', Courier, monospace;font-size:120%;"><b>Girls</b></p>
+            <div class="polaroid">
+               <a href="#" title="Dresses">
+                    <img src="../static/images/girls_category1.webp" alt="Santorini"/>
+                </a>
+                <a href="#" title="Skirts">
+                    <img  src="../static/images/girls_category2.webp" alt="Santorini" title="Sweaters" />
+                </a>
+                <a href="#" title="Sets">
+                    <img  src="../static/images/girls_category3.webp" alt="Santorini" title="Suits" /></a>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="container3">
+            <p><b>BIGGEST DEALS ON TOP BRANDS</b></p>
+        </div >
+        <div class="container5">
+                    <div class="polaroid2">
+                        <a href="#">
+                            <img src="../static/images/kids_topbrands1.jpg" alt="Santorini"/><b>BIBA</b>
+                            <p>Up To 50% OFF</p>
+                        </a>
+                        <a href="#">
+                            <img  src="../static/images/kids_topbrands2.jpg" alt="Santorini" title="Sweaters" /><b>The Roadster</b>
+                            <p>30-50% OFF</p>
+                        </a>
+                        <a href="#">
+                            <img  src="../static/images/kids_topbrands3.jpg" alt="Santorini" title="Suits" /><b>Reliance Trends</b>
+                            <p>FLAT 40% OFF</p>
+                        </a>
+                        <a href="#" >
+                            <img  src="../static/images/kids_topbrands4.jpg" alt="Santorini" title="Jeans" /><b>Jack & Jones</b>
+                            <p>40-60% OFF</p>
+                        </a>
+                        <a href="#" >
+                            <img  src="../static/images/kids_topbrands5.jpg" alt="Santorini" title="Trousers" /><b>AJIO</b>
+                            <p>Min. 30% OFF</p>
+                        </a>
+                    </div>
+                </div>
+                <br>
+            <div class="ele4">
+                <p id=" logosmall"class="logo"><b>S T Y L E U P</b></p>
+                <div class="vl"></div>
+                <blockquote> “Putting on a beautifully designed suit elevates my spirit, extols my sense of self, and helps define me as a man to whom details matter.” – Gay Talese
+                </blockquote>
+        </div>
+        <br>
+
+    </body>
+<script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+          setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+        </script>
+</html>
