@@ -174,7 +174,7 @@ def cart():
 def profile():
     if 'email' in session: 
         
-        query="SELECT name,email_id FROM styleup.customers"
+        query="SELECT user_name,email_id FROM styleup.customers"
         mycursor.execute(query)
         data=mycursor.fetchall()
         return render_template('profile.html' ,data=data)
