@@ -99,13 +99,20 @@ def kids():
 
 @app.route('/product/<item_id>')
 def product(item_id):
-    mycursor.execute("select color, image from item_color where item_id=%s"%item_id)
+    mycursor.execute("select color, image  from item_color where item_id='%s'"%item_id)
     ONE = mycursor.fetchall()
-    return render_template('product.html',data=ONE)
+    print(ONE)
+    mycursor.execute("SELECT item_name,brand,cost,image from items  where item_id='%s'" % item_id)
+    data2=mycursor.fetchall()
+    print(data2)
+    mycursor.execute("select size,availability from item_size where item_id='%s'" %item_id)
+    data3=mycursor.fetchall()
+    print(data3)
+    return render_template('product.html',data=ONE,color_len=len(ONE),data2=data2,data3=data3,len=len(data3))
 
 @app.route('/shop/<category>')
 def process_shop(category):
-    query="SELECT category_id,item_id,brand,cost,image FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+    query="SELECT category_id,item_id,brand,cost,image from styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
     mycursor.execute(query)
     data=mycursor.fetchall()
     return render_template("shop.html", data=data,count=6)
@@ -118,7 +125,7 @@ def process_wishlist(item_id):
     else:
         global url,category
         url='process_shop'
-        category='menshirts'
+        category='men_shirts'
         return ('/login/')
 
 @app.route('/product/<item_id>')
@@ -142,7 +149,7 @@ def filter():
 @app.route('/wishlist/')
 def wishlist():
     if 'email' in session: 
-        category='menshirts'
+        category='men_shirts'
         query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
         mycursor.execute(query)
         data=mycursor.fetchall()
@@ -160,7 +167,7 @@ def after_request(response):
 @app.route('/cart/')
 def cart():
     if 'email' in session: 
-        category='menshirts'
+        category='men_shirts'
         query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
         mycursor.execute(query)
         data=mycursor.fetchall()
