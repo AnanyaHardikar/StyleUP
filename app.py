@@ -105,7 +105,7 @@ def product(item_id):
 
 @app.route('/shop/<category>')
 def process_shop(category):
-    query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+    query="SELECT category_id,item_id,brand,cost,image FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
     mycursor.execute(query)
     data=mycursor.fetchall()
     return render_template("shop.html", data=data,count=6)
