@@ -29,10 +29,12 @@
                     type: "POST",
                     url: url,
                     success: function(msg){
-                        alert( msg );
+                        
                   }
                 });
-
+                if($('#container').text().trim.length==0){
+                    document.getElementById('empty').style.display='block';
+                }
             }
         </script>
     </head>
@@ -108,19 +110,31 @@
                     <button type="submit">logout</button></form>
             </div>
         </div>
-        <div class="container">
-            {% for i in data %}
-            
-            <ul style="display: inline;">
-                <li id="{{ i[1] }}" class="shop-container">
-                    <a href="/product/{{ i[1] }}"><img src="{{ url_for('static' ,filename=i[4]) }}" alt=""></a>
-                    <div class="details-container">
-                        <button style="float: right;" onclick="RemoveFav('{{ i[1] }}')"><b style="font-size: x-large;">x</b></button></a>
-                        <p>{{ i[2] }} &nbsp;&nbsp;&#8377;{{ i[3] }}</p>
-                    </div> 
-                </li>
-            </ul>
-            {% endfor %}
+        {% if checkvar %}
+            <div class="container" id="container">
+                {% for i in data %}
+                
+                <ul style="display: inline;">
+                    <li id="{{ i[1] }}" class="shop-container">
+                        <a href="/product/{{ i[1] }}"><img src="{{ url_for('static' ,filename=i[4]) }}" alt=""></a>
+                        <div class="details-container">
+                            <button style="float: right;" onclick="RemoveFav('{{ i[1] }}')"><b style="font-size: x-large;">x</b></button></a>
+                            <p>{{ i[2] }} &nbsp;&nbsp;&#8377;{{ i[3] }}</p>
+                        </div> 
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+        
+        {% else %}
+        <div class="empty" style="display: block;">
+            <p>There are no elements in your cart</p>
         </div>
+            
+        {% endif %}
+        <div class="empty" id="empty" style="margin-top: 0;">
+            <p>There are no elements in your cart</p>
+        </div>    
+        
     </body>
 </html>

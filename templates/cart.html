@@ -107,6 +107,7 @@
             </ul>
             {% endfor %}
         </div>
+        {% if checkvar %}
         <div class="checkout-container" id="checkout-container">
             <h3 style="margin-left: 40%;">Payment</h3>
             <label for="fname">Accepted Cards</label>
@@ -142,6 +143,7 @@
                 <input type="text" id="zip" name="zip" placeholder="Enter 6 digit pincode">
                 <input type="submit" onclick="openInvoice()" value="Continue to checkout" class="btn">
         </div>
+        {% endif %}
             <div class="invoice-container" id="invoice">
                 <span onclick="document.getElementById('invoice').style.display='none'" class="close" title="close invoice">x</span>
                 <p style="text-align: center;"><b>INVOICE</b></p>

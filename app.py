@@ -14,6 +14,8 @@ app.secret_key="secret key"
 
 url=""
 category=""
+user=""
+filtered_serach=[]
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -59,7 +61,11 @@ def check():
             return render_template("login.html", data1="Invalid Email")
         else:
             if(d[0][0]==email and d[0][2]==psw):
+                global user
+                user=email
                 session['email']=email
+                
+                print(user)
                 if 'email' in session:
                     global url,category
                     if category=="":
@@ -112,20 +118,31 @@ def product(item_id):
 
 @app.route('/shop/<category>')
 def process_shop(category):
-    query="SELECT category_id,item_id,brand,cost,image from styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
-    mycursor.execute(query)
-    data=mycursor.fetchall()
+    global filtered_serach
+    if category=="filter":
+        data=filtered_serach
+    else:
+        query="SELECT category_id,item_id,brand,cost,image FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+        mycursor.execute(query)
+        data=mycursor.fetchall()
     return render_template("shop.html", data=data,count=6)
 
 @app.route('/add_to_wishlist/<item_id>', methods=["POST"])
 def process_wishlist(item_id):
     if 'email' in session:
-        print ("Hello ",item_id)
+        global user
+        query="INSERT into wishlist values(%s,%s)"
+        value=(user,item_id)
+        mycursor.execute(query,value)
+        mydb.commit()
         return ("Added Successfully")
     else:
         global url,category
         url='process_shop'
-        category='men_shirts'
+        query="SELECT category_name from styleup.category where category_id in (SELECT category_id from styleup.items where item_id=%s)"%item_id
+        mycursor.execute(query)
+        category=mycursor.fetchone()[0]
+        print(category)
         return ('/login/')
 
 @app.route('/product/<item_id>')
@@ -136,24 +153,35 @@ def process_product(item_id):
 
 @app.route('/remove_fav/<id>',methods=['POST'])
 def remove_fav(id):
-    print(id)
+    query="DELETE FROM wishlist where item_id=%s"%id
+    mycursor.execute(query)
+    mydb.commit()
     return ("Removed Successfully")
 
 @app.route('/filter/',methods=["POST"])
 def filter():
+    global filtered_serach
     color=request.form['color']
-    category=request.form['category']
-    print(color,category)
-    return render_template('blog.html')
+    category="%"+request.form['category']+"%"
+    size=request.form['size']
+    query="SELECT item_name,items.item_id,brand,cost,item_color.image FROM styleup.items INNER JOIN  styleup.item_color ON items.item_id=item_color.item_id  where color=%s and category_id in (SELECT category_id from styleup.category where category_name LIKE %s)"
+    value=(color,category)
+    mycursor.execute(query,value)
+    filtered_serach=mycursor.fetchall()
+    category="filter"
+    return redirect(url_for('process_shop',category=category))
 
 @app.route('/wishlist/')
 def wishlist():
+    checkvar=True
     if 'email' in session: 
-        category='men_shirts'
-        query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+        global user
+        query="SELECT category_id,item_id,brand,cost,image FROM styleup.items where item_id IN (SELECT item_id from styleup.wishlist where email_id='%s')"%user
         mycursor.execute(query)
         data=mycursor.fetchall()
-        return render_template('wishlist.html' ,data=data)
+        if len(data)==0:
+            checkvar=False
+        return render_template('wishlist.html' ,data=data,checkvar=checkvar)
     else:
         global url
         url="wishlist"
@@ -166,12 +194,15 @@ def after_request(response):
 
 @app.route('/cart/')
 def cart():
+    checkvar=True
     if 'email' in session: 
         category='men_shirts'
         query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
         mycursor.execute(query)
         data=mycursor.fetchall()
-        return render_template('cart.html' ,data=data)
+        if len(data)==0:
+            checkvar=False
+        return render_template('cart.html' ,data=data,checkvar=checkvar)
     else:
         global url
         url="cart"
