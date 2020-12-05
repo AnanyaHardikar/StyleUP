@@ -295,22 +295,22 @@
                     <tr>
                         <th>Item ID</th>
                         <th>Item Name</th>
-                        <th>Brand</th>
-                        <th>Cost</th> 
+                        <th>Brand</th> 
                         <th>COlor</th>
-                        <th>Size</th>   
+                        <th>Size</th> 
+                        <th>Cost</th>  
                     </tr>
                     {% for i in data %}
                     {% set rowid='table' %}
                     {% set id=i[1] | string() %}
                     {% set rowid=rowid+id %}
                     <tr id="{{ rowid }}">
-                        <td>{{ i[1] }}</td>
-                        <td>{{ i[0] }}</td>
-                        <td>{{ i[2] }}</td>
-                        <td>&#8377;{{ i[3] }}</td>
-                        <td>{{ i[5] }}</td>
-                        <td>{{ i[6] }}</td>
+                        <td data-label="Item ID">{{ i[1] }}</td>
+                        <td data-label="Item Name">{{ i[0] }}</td>
+                        <td data-label="Brand">{{ i[2] }}</td>
+                        <td data-label="Color">{{ i[5] }}</td>
+                        <td data-label="Size">{{ i[6] }}</td>
+                        <td data-label="Cost">&#8377;{{ i[3] }}</td>
                     </tr>
                     {% endfor %}
                 </table>
@@ -384,7 +384,7 @@
             })
             document.getElementById('items').innerHTML="("+items+" items)";
             document.getElementById('sum').innerHTML="Total="+res;
-            document.getElementById('amount').value=res;
+            document.getElementById('amount').value=(res+100);
             document.getElementById('subtotal').innerHTML="Sub total:"+res;
             document.getElementById('tax').innerHTML='Tax:100';
             document.getElementById('total').innerHTML='Total:'+(res+100);
@@ -411,7 +411,7 @@
         })
         document.getElementById('items').innerHTML="("+items+" items)";
         document.getElementById('sum').innerHTML="Total="+res;
-        document.getElementById('amount').value=res;
+        document.getElementById('amount').value=(res+100);
         document.getElementById('subtotal').innerHTML="Sub total:"+res;
         document.getElementById('tax').innerHTML='Tax:100';
         document.getElementById('total').innerHTML='Total:'+(res+100);
