@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Style UP| Cart</title>
+        <title>Style UP| Orders</title>
         <meta name="viewport" content="width=device-width">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/cart.css') }}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/orders.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        
         
     </head>
     <body>
+        
         <header>
             <div class="navbar">
                 <div class="unit1">
@@ -180,120 +177,48 @@
                       </div>
                 </div>
         </header>
+    
         <br>
         <div class="content">
             <div class="head2">
-                <p class="logo"><b>S T Y L E U P</b></p>
-                <form action="/logout/">
-                <button type="submit" style="margin-top: 50%;">logout</button></form>
+                <p class="logo" ><b>S T Y L E U P</b></p>
+                <div class="ctg">
+                    <a class="circle" href="/men/"><i style="font-size:24px;" class="fa">&#xf183;</i>Men</a>
+                    <a  class="circle" href="/women/"> <i style="font-size:24px" class="fa">&#xf182;</i>Women</a>
+                    <a class="circle" href="/kids/"><i style="font-size:24px" class="fa">&#xf1ae;</i>Kids</a>
+                </div>
             </div>
-        </div>
-        <div class="container cart-container" id="cart-container" style="display: none;width: 40%;text-align: center;vertical-align: middle;">
-            
-        </div>
-        <div class="container" id="container">
-            <div class="cart-container " >
-                <p style="display: inline;">My shopping bag</p><p id="items" style="display: inline;"></p><p style="float: right;margin-top: 0;" id="sum"></p>
-            </div>
-            {% for i in data %}
-            <ul style="display: inline;">
-                <li id="{{ i[1] }}" class="shop-container">
-                    <a href="/product/{{ i[1] }}"><img src="{{ url_for('static' ,filename=i[4]) }}" alt=""></a>
-                    <div class="details-container">
-                        <button style="float: right;" onclick="RemoveCart('{{ i[1] }}')"><b style="font-size: x-large;">x</b></button></a>
-                        <p>{{ i[0] }}</p>
-                        <p>{{ i[2] }}</p>
-                        <p id="para">&#8377;{{ i[3] }}<br></p> 
-                        <p>{{ i[5] }}<br></p> 
-                        <p>{{ i[6] }} <br></p>
-                    </div> 
-                </li>
-            </ul>
-            {% endfor %}
         </div>
         {% if checkvar %}
-        <div class="checkout-container" id="checkout-container">
-            <h3 style="margin-left: 40%;">Payment</h3>
-            <label for="fname">Accepted Cards</label>
-            <div class="icon-container">
-              <i class="fa fa-cc-visa" style="color:navy;"></i>
-              <i class="fa fa-cc-amex" style="color:blue;"></i>
-              <i class="fa fa-cc-mastercard" style="color:red;"></i>
-              <i class="fa fa-cc-discover" style="color:orange;"></i>
-            </div>
-            
-                <label for="cname">Name on Card</label>
-                <input type="text" id="cname" name="cardname" placeholder="Name on card">
-                <label for="ccnum">Credit card number</label>
-                <input type="text" id="ccnum" name="cardnumber" placeholder="Card number">
-                <label for="expdate">Exp Date</label>
-                <input type="text" id="expdate" name="expdate" placeholder="4/2021">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="Enter 3 digit CVV on card">
-                <label for="amount">Amount to be paid &#8377;</label>
-                <input type="text" id="amount" disabled>
-                <h3 style="margin-left: 30%;">Billing Address</h3>
-                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                <input type="text" id="fname" name="firstname" placeholder="Enter full name">
-                <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                <input type="text" id="email" name="email" placeholder="Enter email id">
-                <label for="adr"><i class="fa fa-address-card"></i> Address</label>
-                <input type="text" id="adr" name="address" placeholder="Enter address">
-                <label for="city"><i class="fa fa-institution"></i> City</label>
-                <input type="text" id="city" name="city" placeholder="Enter city">
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" placeholder="Enter state">
-                <label for="zip">Pincode</label>
-                <input type="text" id="zip" name="zip" placeholder="Enter 6 digit pincode">
-                <input type="submit" onclick="openInvoice()" value="Continue to checkout" class="btn">
-        </div>
-        {% endif %}
-            <div class="invoice-container" id="invoice">
-                <span onclick="document.getElementById('invoice').style.display='none'" class="close" title="close invoice">x</span>
-                <p style="text-align: center;"><b>INVOICE</b></p>
-                <div style="float: right; margin-right: 10%;">
-                    <div class="head2">
-                        <p class="logo"><b>S T Y L E U P</b></p>
+            {% set glob={'previousID':0} %}
+            {% for i in data %}
+                {% set orderID=i[0] %} 
+                {% set date=i[1] %} 
+                {% if orderID|int()== glob['previousID'] |int() %}
+                    {% continue %}
+                {% else %}   
+                    {% set _=glob.update({'previousID':orderID}) %}
+                    <div class="container">
+                        <p><b>#{{orderID}}&nbsp;&nbsp;Orderd on:{{date}}</b></p>
+                        {% for j in data %}
+                            {% if j[0]==orderID %}
+                                <div class="shop-container">
+                                    <a href="/product/{{ j[8] }}"><img src="{{ url_for('static' ,filename=j[5]) }}" alt=""></a>
+                                    <div class="details-container">
+                                        <p>{{j[2]}}</p>
+                                        <p>Size:{{j[3] }}&nbsp;&nbsp;Color:{{j[4] }}</p>
+                                        <p>Brand:{{ j[6] }} &nbsp;&nbsp;Amount:&#8377;{{ j[7] }}</p>
+                                    </div> 
+                                    <br>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                </div>
-                <div style="float: left; margin-left: 10%;">
-                    <p id="name"></p>
-                    <p id="email-id"></p>
-                    <p id="address"></p>
-                    <p id="city1"></p>
-                    <p id="state1"></p>
-                    <p id="pincode"></p>
-                    <p id="orderID"></p>
-                </div>
-                <table class="table-content">
-                    <tr>
-                        <th>Item ID</th>
-                        <th>Item Name</th>
-                        <th>Brand</th>
-                        <th>Cost</th> 
-                        <th>COlor</th>
-                        <th>Size</th>   
-                    </tr>
-                    {% for i in data %}
-                    {% set rowid='table' %}
-                    {% set id=i[1] | string() %}
-                    {% set rowid=rowid+id %}
-                    <tr id="{{ rowid }}">
-                        <td>{{ i[1] }}</td>
-                        <td>{{ i[0] }}</td>
-                        <td>{{ i[2] }}</td>
-                        <td>&#8377;{{ i[3] }}</td>
-                        <td>{{ i[5] }}</td>
-                        <td>{{ i[6] }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                <div style="float: right;margin-right: 10%;">
-                    <p id="subtotal"></p>
-                    <p id="tax"></p>
-                    <p id="total" style="font-size: larger;"></p>
-                </div>
-            </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="container" style="text-align: center;font-size: large;margin: 5%;">You haven't ordered anything yet</div>
+        {% endif %}
         
     </body>
     <script>
@@ -304,90 +229,5 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-        function openInvoice(){
-            var name=document.getElementById('fname').value;
-            var email=document.getElementById('email').value;
-            var addr=document.getElementById('adr').value;
-            var city=document.getElementById('city').value;
-            var state=document.getElementById('state').value;
-            var pin=document.getElementById('zip').value;
-            document.getElementById('name').innerHTML=name;
-            document.getElementById('email-id').innerHTML=email;
-            document.getElementById('address').innerHTML=addr;
-            document.getElementById('city1').innerHTML=city;
-            document.getElementById('state1').innerHTML=state;
-            document.getElementById('pincode').innerHTML=pin;
-
-            var today=new Date();
-            var orderId=today.getTime();
-            
-            document.getElementById('orderID').innerHTML="Order ID:"+orderId;
-            var url="/add_to_orders/"+orderId;
-            $.ajax({
-                type: "POST",
-                url: url,
-                success: function(msg){
-                    alert( msg );
-              }
-            });
-
-            var node=document.getElementById('invoice');
-            node.style.display='block';
-            document.getElementById('container').remove();
-            document.getElementById('checkout-container').remove();
-            var info=document.getElementById('cart-container');
-            info.innerHTML="No items in cart";
-            info.style.display='block';
-        }
-        function RemoveCart(id) {
-            var node=document.getElementById(id);
-            var parent=node.parentNode;
-            node.parentNode.removeChild(node);
-            parent.style.padding=0;
-
-            var tableid="table".concat(id);
-            document.getElementById(tableid).remove();
-
-            var res=0;
-            var items=0;
-            $('.details-container p#para').each(function(){
-                var inp=$(this).text();
-                var num=inp.substr(1);
-                res+=parseInt(num);
-                items+=1;
-            })
-            document.getElementById('items').innerHTML="("+items+" items)";
-            document.getElementById('sum').innerHTML="Total="+res;
-            document.getElementById('amount').value=res;
-            document.getElementById('subtotal').innerHTML="Sub total:"+res;
-            document.getElementById('tax').innerHTML='Tax:100';
-            document.getElementById('total').innerHTML='Total:'+(res+100);
-            var url="/remove_cart/".concat(id);
-            if($('#shop-container').text().trim().length==0){
-                document.getElementById('checkout-container').style.display='none';
-            }
-            $.ajax({
-                type: "POST",
-                url: url,
-                success: function(msg){
-                    alert( msg );
-              }
-            });
-
-        }
-        var res=0;
-        var items=0;
-        $('.details-container p#para').each(function(){
-            var inp=$(this).text();
-            var num=inp.substr(1);
-            res+=parseInt(num);
-            items+=1;
-        })
-        document.getElementById('items').innerHTML="("+items+" items)";
-        document.getElementById('sum').innerHTML="Total="+res;
-        document.getElementById('amount').value=res;
-        document.getElementById('subtotal').innerHTML="Sub total:"+res;
-        document.getElementById('tax').innerHTML='Tax:100';
-        document.getElementById('total').innerHTML='Total:'+(res+100);
     </script>
 </html>

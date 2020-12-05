@@ -33,14 +33,7 @@
     padding: 7px 0;
     font-size: 24px;
   }
-  i.fa {
-    -webkit-animation: show 1s 1;
-    /* any other properties to override from FontAwesome's default .fa rule */
-  }
-  @-webkit-keyframes show {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
+
 .checkout-container input[type=text] {
     width: 80%;
     margin-left: 5%;
@@ -70,12 +63,12 @@
 
 .shop-container a>img{
     float: left;
-    width: 50%;
-    height: 50%;
+    width: 150px;
+    height: 150px;
 }
 
 .details-container{
-    margin-left: 60%;
+    margin-left: 50%;
     font-weight: bold;
     font-size: large;
     padding-top: 1%;
