@@ -1,6 +1,9 @@
 import mysql.connector
 import json
 from flask import Flask, render_template,request,session,redirect,url_for,Response
+import json
+from datetime import date
+
 mydb = mysql.connector.connect(
   host="127.0.0.1",
   user="root",
@@ -10,12 +13,15 @@ mydb = mysql.connector.connect(
 mycursor=mydb.cursor()
 app=Flask(__name__)
 app.secret_key="secret key"
-
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
+app.jinja_env.add_extension('jinja2.ext.do')
 
 url=""
 category=""
+global_id=0
 user=""
 filtered_serach=[]
+order_id=1000001
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -64,12 +70,13 @@ def check():
                 global user
                 user=email
                 session['email']=email
-                
-                print(user)
                 if 'email' in session:
-                    global url,category
-                    if category=="":
+                    global url,category,global_id
+
+                    if category=="" and global_id==0:
                         return redirect(url_for(url))
+                    elif global_id!=0:
+                        return redirect(url_for(url,item_id=global_id))
                     else:
                         return redirect(url_for(url,category=category))
                 else:
@@ -108,7 +115,7 @@ def product(item_id):
     mycursor.execute("select color, image  from item_color where item_id='%s'"%item_id)
     ONE = mycursor.fetchall()
     print(ONE)
-    mycursor.execute("SELECT item_name,brand,cost,image from items  where item_id='%s'" % item_id)
+    mycursor.execute("SELECT item_name,brand,cost,image,item_id from items  where item_id='%s'" % item_id)
     data2=mycursor.fetchall()
     print(data2)
     mycursor.execute("select size,availability from item_size where item_id='%s'" %item_id)
@@ -127,28 +134,42 @@ def process_shop(category):
         data=mycursor.fetchall()
     return render_template("shop.html", data=data,count=6)
 
+
 @app.route('/add_to_wishlist/<item_id>', methods=["POST"])
 def process_wishlist(item_id):
     if 'email' in session:
         global user
-        query="INSERT into wishlist values(%s,%s)"
+        user=session['email']
+        query="INSERT into styleup.wishlist values(%s,%s)"
         value=(user,item_id)
         mycursor.execute(query,value)
         mydb.commit()
         return ("Added Successfully")
     else:
-        global url,category
-        url='process_shop'
-        query="SELECT category_name from styleup.category where category_id in (SELECT category_id from styleup.items where item_id=%s)"%item_id
-        mycursor.execute(query)
-        category=mycursor.fetchone()[0]
-        print(category)
+        global url,global_id
+        url='product'
+        global_id=item_id
         return ('/login/')
 
-@app.route('/product/<item_id>')
-def process_product(item_id):
-    print(item_id)
-    return render_template('product.html')
+@app.route('/add_to_cart/', methods=["POST"])
+def process_cart():
+    item_id=request.json['item_id']
+    color=request.json['color']
+    size=request.json['size']
+    image=request.json['image']
+    if 'email' in session:
+        global user
+        user=session['email']
+        query="INSERT into styleup.cart values(%s,%s,%s,%s,%s)"
+        value=(user,item_id,color,size,image)
+        mycursor.execute(query,value)
+        mydb.commit()
+        return ("Added Successfully")
+    else:
+        global url,global_id
+        url='product'
+        global_id=item_id
+        return ('/login/')
 
 
 @app.route('/remove_fav/<id>',methods=['POST'])
@@ -157,6 +178,35 @@ def remove_fav(id):
     mycursor.execute(query)
     mydb.commit()
     return ("Removed Successfully")
+
+@app.route('/remove_cart/<id>',methods=['POST'])
+def remove_cart(id):
+    query="DELETE FROM cart where item_id=%s"%id
+    mycursor.execute(query)
+    mydb.commit()
+    return ("Removed Successfully")
+
+@app.route('/add_to_orders/<orderID>',methods=['POST'])
+def add_to_orders(orderID):
+    global user
+    user=session['email']
+    query="SELECT item_id,color,size,image from cart where email_id='%s'"%user
+    mycursor.execute(query)
+    data=mycursor.fetchall()
+    print(data)
+    query1="INSERT INTO orders VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    d=date.today()
+    query2="UPDATE item_size SET availability=availability-1 where item_id=%s and size=%s "
+    for i in data:
+        value1=(orderID,d,user,i[0],i[1],i[2],i[3])
+        mycursor.execute(query1,value1)
+        value2=(i[0],i[2])
+        mycursor.execute(query2,value2)
+        mydb.commit()
+    query3="DELETE FROM cart where email_id='%s'"%user
+    mycursor.execute(query3)
+    mydb.commit()
+    return("Order Placed Successfully")
 
 @app.route('/filter/',methods=["POST"])
 def filter():
@@ -196,8 +246,9 @@ def after_request(response):
 def cart():
     checkvar=True
     if 'email' in session: 
-        category='men_shirts'
-        query="SELECT * FROM styleup.items NATURAL JOIN styleup.category where category_name='%s'"%category
+        global user
+        user=session['email']
+        query="SELECT items.item_name,cart.item_id,items.brand,items.cost,cart.image,cart.color,cart.size FROM styleup.cart INNER JOIN styleup.items ON cart.item_id=items.item_id where email_id='%s'"%user
         mycursor.execute(query)
         data=mycursor.fetchall()
         if len(data)==0:
@@ -220,6 +271,20 @@ def profile():
         global url
         url="profile"
         return render_template('login.html')
+
+@app.route("/orders/")
+def orders():
+    global user
+    checkvar=True
+    user=session['email']
+    query="SELECT order_id,order_date,items.item_name,color,size,orders.image,items.brand,items.cost,orders.item_id FROM orders INNER JOIN items ON orders.item_id=items.item_id where email_id='%s'"%user
+    mycursor.execute(query)
+    data=mycursor.fetchall()
+    print(data)
+    if len(data)==0:
+        checkvar=False
+    return render_template('orders.html',data=data,checkvar=checkvar)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

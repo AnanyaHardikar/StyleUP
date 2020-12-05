@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/men.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Lexend Giga' rel='stylesheet'>
@@ -15,30 +16,124 @@
 <header>
             <div class="navbar">
                 <div class="unit1">
-                    <a href="/home/"><button class="nav_item"> Home</button></a>
+                    <a href="/"><button class="nav_item"> Home</button></a>
                     <button class="nav_item">Category
                         <ul class="submenu">
-                            <li><a href="/men/" class="nav_item">Men</a></li>
-                            <li><a href="/women/" class="nav_item">Women</a></li>
-                            <li><a href="/kids/" class="nav_item">Kids</a></li>
+                            <li><a href="/men/" class="nav_item" style="font-weight: bolder;"> Men</a></li>
+                            <div class="nav_item">
+                                &nbsp;<li><b ><pre>Topwear </pre></b></li>
+                                <div class="subcategory" id="id1">
+                                    <ul >
+                                        <li><a href="/shop/men_shirts" class="nav_item" name="shirts" >Shirts</a></li>
+                                        <li><a href="/shop/men_sweaters" class="nav_item" name="sweaters">Sweaters</a></li>
+                                        <li><a href="/shop/men_suits" class="nav_item" name="suits">Suits</a></li><br>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="nav_item">
+                                &nbsp;<li><b><pre> Bottomwear </pre></b></li>
+                                <div class="subcategory">
+                                    <ul >
+                                        <li><a href="/shop/men_jeans" class="nav_item" name="jeans" >Jeans</a></li>
+                                        <li><a href="/shop/men_trousers" class="nav_item" name="trousers">Trousers</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="nav_item">
+                                &nbsp;<li><b><pre> Festive wear</pre></b></li>
+                                <div class="subcategory">
+                                    <ul>
+                                        <li><a href="/shop/men_kurtas" class="nav_item" name="kurtas">Kurtas & Kurtis</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <li><a href="/women/" class="nav_item" style="clear: left;font-weight: bolder;">Women</a></li>
+                            
+                            <div class="nav_item">
+                                &nbsp;<li><b><pre>Indianwear </pre></b></li>
+                                <div class="subcategory">
+                                    <ul >
+                                        <li><a href="/shop/women_kurtas" class="nav_item" name="kurtas" >Kurtas & Kurtis</a></li>
+                                        <li><a href="/shop/women_ethnic" class="nav_item" name="ethnic" >Ethnic</a></li>
+                                        <li><a href="/shop/women_sarees" class="nav_item" name="saree" style="clear: left;">Sarees</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="nav_item">
+                                &nbsp;<li><b><pre> Westernwear </pre></b></li>
+                                <div class="subcategory">
+                                    <ul >
+                                        <li><a href="/shop/women_dresses" class="nav_item" name="dress" >Dresses</a></li>
+                                        <li><a href="/shop/women_jumpsuits" class="nav_item" name="jumpsuit">Jumpsuit</a></li>
+                                        <li><a href="/shop/women_sweatshirts" class="nav_item" name="sweatshirts">Sweatshirts</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="nav_item">
+                                &nbsp;<li><b ><pre> Bottomwear</pre></b></li>
+                                <div class="subcategory">
+                                    <ul >
+                                        <li><a href="/shop/women_skirts" class="nav_item" name="skirts" >Skirts</a></li>
+                                        <li><a href="/shop/women_palazzos" class="nav_item" name="palazzo">Palazzos</a></li>
+                                        <li><a href="/shop/women_jeans" class="nav_item" name="jeans">Jeans</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <li><a href="/kids/" class="nav_item" style="font-weight: bolder;clear:left;">Kids</a></li><br>
+                            <div class="nav_item">
+                                &nbsp;<li><b><pre>Boys </pre></b></li>
+                                <div class="subcategory">
+                                    <ul >
+                                        <li><a href="/shop/boys_shirts" class="nav_item" name="shirts" >Shirts</a></li>
+                                        <li><a href="/shop/boys_trousers" class="nav_item" name="trousers">Trousers</a></li>
+                                        <li><a href="/shop/boys_sets" class="nav_item" name="sets">Sets</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="nav_item">
+                                &nbsp;<li><b><pre> Girls</pre></b></li>
+                                <div class="subcategory">
+                                    <ul >
+                                        <li><a href="/shop/girls_dresses" class="nav_item" name="dress" >Dresses</a></li>
+                                        <li><a href="/shop/girls_skirts" class="nav_item" name="skirts">Skirts</a></li>
+                                        <li><a href="/shop/girls_sets" class="nav_item" name="sets">Sets</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </ul>
                     </button>
                     <a href="/blog/"><button class="nav_item">Blog</button></a>
                 </div>
                 <div class="unit2">
-                    <form action="">
+                    <form action="/logout/">
+                        <button><i class="fa fa-power-off" ></i></button>
+                    </form>
+                    <form action="/profile/">
                         <button><i class="fa fa-user" ></i></button>
                     </form>
-                    <form action="">
+                    <form action="/cart/">
                         <button><i class="fa fa-shopping-cart" ></i></button>
                     </form>
-                    <form action="">
+                    <form action="/wishlist/">
                         <button><i class="fa fa-heart"></i></button>
                     </form>
-                    <form action="" >
-                        <input type="text" name="search" placeholder="Search here.." style="border:none;outline:none;">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+
+                      <button style="float:right;" onclick="filterFunction();myFunction();" class="dropbtn"><i class="fa fa-search"></i></button>
+                      <input style="margin-top:10px;padding:4px;" type="text" placeholder="Search.." id="myInput">
+                    <div id="myDropdown" class="dropdown-content">
+                          <a href="/shop/men_shirts">Men Shirts</a>
+                          <a href="/shop/men_sweaters">Men Sweaters</a>
+                          <a href="/shop/men_trousers">Men Trousers</a>
+                          <a href="/shop/men_suits">Men suits</a>
+                          <a href="/shop/men_jeans">Men Jeans</a>
+                          <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
+                          <a href="/shop/boys_sets">Boys suits</a>
+                      </div>
+
                 </div>
             </div>
             <div id="mySidenav" class="sidenav">
@@ -57,22 +152,30 @@
             </div>
             <span class="sidemenu-content" onclick="openNav()">&#9776; </span>
                 <div class="unit3">
-                    <form action="">
+                    <form action="/logout/">
+                        <button><i class="fa fa-power-off" ></i></button>
+                    </form>
+                    <form action="/profile/">
                         <button><i class="fa fa-user" ></i></button>
                     </form>
-                    <form action="">
+                    <form action="/cart/">
                         <button><i class="fa fa-shopping-cart" ></i></button>
                     </form>
-                    <form action="">
+                    <form action="/wishlist/">
                         <button><i class="fa fa-heart"></i></button>
                     </form>
-                    <form action="">
 
-                        <button type="submit" style="float: right;"><i class="fa fa-search" ></i></button>
-                        <div class="unit4">
-                            <input type="text" name="search" placeholder="Search here.." size="13"  style="border:none;outline:none;">
-                        </div>
-                    </form>
+                      <button style="float:right;"onclick="filterFunction2();myFunction2();" class="dropbtn2"><i class="fa fa-search"></i></button>
+                      <input style="float:right;margin-top:10px;" type="text" placeholder="Search.." size="8" id="myInput2">
+                    <div id="myDropdown2" class="dropdown-content2">
+                        <a href="/shop/men_shirts">Men Shirts</a>
+                        <a href="/shop/men_sweaters">Men Sweaters</a>
+                        <a href="/shop/men_trousers">Men Trousers</a>
+                        <a href="/shop/men_suits">Men suits</a>
+                        <a href="/shop/men_jeans">Men Jeans</a>
+                        <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
+                        <a href="/shop/boys_sets">Boys suits</a>
+                      </div>
                 </div>
         </header>
         <br>
