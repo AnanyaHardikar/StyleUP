@@ -190,7 +190,7 @@
 
                       <button style="float:right;"onclick="filterFunction2();myFunction2();" class="dropbtn2"><i class="fa fa-search"></i></button>
                       <input style="float:right;margin-top:10px;" type="text" placeholder="Search.." size="8" id="myInput2">
-                    <div id="myDropdown2" class="dropdown-content2">
+                        <div id="myDropdown2" class="dropdown-content2">
                           <a href="/shop/men_shirts">Men Shirts</a>
                           <a href="/shop/men_sweaters">Men Sweatshirts</a>
                           <a href="/shop/men_trousers">Men Trousers</a>
@@ -244,7 +244,7 @@
             <div class="blog-container">
 
                         <p id="less">{{data[i][1]}}<span id="dots">...</span><span style="display:none;" id="more_{{i}}">{{data[i][2]}}</span></p>
-                <button onclick="myFunction('myBtn_{{i}}',{{data}})" id="myBtn_{{i}}">Read more</button>
+                <button onclick="myFunction3('myBtn_{{i}}',{{data}})" id="myBtn_{{i}}">Read more</button>
                 <button style="float:right" >{{data[i][4]}}</button>
             </div>
             {% endfor %}
@@ -253,7 +253,7 @@
 
 <script>
 
-function myFunction(select,data) {
+function myFunction3(select,data) {
   
     for(var i=0;i<data.length;i++)
     {
