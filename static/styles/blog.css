@@ -258,3 +258,9 @@ a.circle:hover {
     background-color:#c99947;
     padding-left:1%;
 }
+@media (max-width: 819px) {
+    .ads{display:none;}
+    .container{
+    margin-top: 60%;
+}
+}

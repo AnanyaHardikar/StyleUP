@@ -131,12 +131,26 @@
                       <input style="margin-top:10px;padding:4px;" type="text" placeholder="Search.." id="myInput">
                     <div id="myDropdown" class="dropdown-content">
                           <a href="/shop/men_shirts">Men Shirts</a>
-                          <a href="/shop/men_sweaters">Men Sweaters</a>
+                          <a href="/shop/men_sweaters">Men Sweatshirts</a>
                           <a href="/shop/men_trousers">Men Trousers</a>
                           <a href="/shop/men_suits">Men suits</a>
                           <a href="/shop/men_jeans">Men Jeans</a>
                           <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
-                          <a href="/shop/boys_sets">Boys suits</a>
+                          <a href="/shop/women_kurtas">Women Kurtas</a>
+                          <a href="/shop/women_ethnic">Women Ethnic</a>
+                          <a href="/shop/women_sarees">Women Sarees</a>
+                          <a href="/shop/women_dresses">Women Dresses</a>
+                          <a href="/shop/women_jumpsuits">Women Jumpsuits</a>
+                          <a href="/shop/women_sweatshirts">Women Sweatshirts</a>
+                          <a href="/shop/women_skirts">Women Skirts</a>
+                          <a href="/shop/women_palazzos">Women Palazzos</a>
+                          <a href="/shop/women_jeans">Women Jeans</a>
+                          <a href="/shop/boys_shirts">Boys Shirts</a>
+                          <a href="/shop/boys_trousers">Boys Trousers</a>
+                          <a href="/shop/boys_sets">Boys Sets</a>
+                          <a href="/shop/girls_dresses">Girls Dresses</a>
+                          <a href="/shop/girls_skirts">Girls Skirts</a>
+                          <a href="/shop/girls_sets">Girls Sets</a>
                       </div>
 
                 </div>
@@ -174,12 +188,26 @@
                       <input style="float:right;margin-top:10px;" type="text" placeholder="Search.." size="8" id="myInput2">
                     <div id="myDropdown2" class="dropdown-content2">
                         <a href="/shop/men_shirts">Men Shirts</a>
-                        <a href="/shop/men_sweaters">Men Sweaters</a>
-                        <a href="/shop/men_trousers">Men Trousers</a>
-                        <a href="/shop/men_suits">Men suits</a>
-                        <a href="/shop/men_jeans">Men Jeans</a>
-                        <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
-                        <a href="/shop/boys_sets">Boys suits</a>
+                          <a href="/shop/men_sweaters">Men Sweatshirts</a>
+                          <a href="/shop/men_trousers">Men Trousers</a>
+                          <a href="/shop/men_suits">Men suits</a>
+                          <a href="/shop/men_jeans">Men Jeans</a>
+                          <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
+                          <a href="/shop/women_kurtas">Women Kurtas</a>
+                          <a href="/shop/women_ethnic">Women Ethnic</a>
+                          <a href="/shop/women_sarees">Women Sarees</a>
+                          <a href="/shop/women_dresses">Women Dresses</a>
+                          <a href="/shop/women_jumpsuits">Women Jumpsuits</a>
+                          <a href="/shop/women_sweatshirts">Women Sweatshirts</a>
+                          <a href="/shop/women_skirts">Women Skirts</a>
+                          <a href="/shop/women_palazzos">Women Palazzos</a>
+                          <a href="/shop/women_jeans">Women Jeans</a>
+                          <a href="/shop/boys_shirts">Boys Shirts</a>
+                          <a href="/shop/boys_trousers">Boys Trousers</a>
+                          <a href="/shop/boys_sets">Boys Sets</a>
+                          <a href="/shop/girls_dresses">Girls Dresses</a>
+                          <a href="/shop/girls_skirts">Girls Skirts</a>
+                          <a href="/shop/girls_sets">Girls Sets</a>
                       </div>
                 </div>
         </header>
@@ -318,6 +346,45 @@
                 }
             });
         }
+
     }
+    function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+        function filterFunction() {
+                  var input, filter, ul, li, a, i;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  div = document.getElementById("myDropdown");
+                  a = div.getElementsByTagName("a");
+                  for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
+                    } else {
+                      a[i].style.display = "none";
+                    }
+                  }
+                }
+          function myFunction2() {
+              document.getElementById("myDropdown2").classList.toggle("show");
+            }
+
+        function filterFunction2() {
+                  var input, filter, ul, li, a, i;
+                  input = document.getElementById("myInput2");
+                  filter = input.value.toUpperCase();
+                  div = document.getElementById("myDropdown2");
+                  a = div.getElementsByTagName("a");
+                  for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
+                    } else {
+                      a[i].style.display = "none";
+                    }
+                  }
+                }
 </script>
 </html>

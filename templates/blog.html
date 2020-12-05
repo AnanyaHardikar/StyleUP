@@ -135,12 +135,26 @@
                       <input style="margin-top:10px;padding:4px;" type="text" placeholder="Search.." id="myInput">
                     <div id="myDropdown" class="dropdown-content">
                           <a href="/shop/men_shirts">Men Shirts</a>
-                          <a href="/shop/men_sweaters">Men Sweaters</a>
+                          <a href="/shop/men_sweaters">Men Sweatshirts</a>
                           <a href="/shop/men_trousers">Men Trousers</a>
                           <a href="/shop/men_suits">Men suits</a>
                           <a href="/shop/men_jeans">Men Jeans</a>
                           <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
-                          <a href="/shop/boys_sets">Boys suits</a>
+                          <a href="/shop/women_kurtas">Women Kurtas</a>
+                          <a href="/shop/women_ethnic">Women Ethnic</a>
+                          <a href="/shop/women_sarees">Women Sarees</a>
+                          <a href="/shop/women_dresses">Women Dresses</a>
+                          <a href="/shop/women_jumpsuits">Women Jumpsuits</a>
+                          <a href="/shop/women_sweatshirts">Women Sweatshirts</a>
+                          <a href="/shop/women_skirts">Women Skirts</a>
+                          <a href="/shop/women_palazzos">Women Palazzos</a>
+                          <a href="/shop/women_jeans">Women Jeans</a>
+                          <a href="/shop/boys_shirts">Boys Shirts</a>
+                          <a href="/shop/boys_trousers">Boys Trousers</a>
+                          <a href="/shop/boys_sets">Boys Sets</a>
+                          <a href="/shop/girls_dresses">Girls Dresses</a>
+                          <a href="/shop/girls_skirts">Girls Skirts</a>
+                          <a href="/shop/girls_sets">Girls Sets</a>
                       </div>
 
                 </div>
@@ -177,13 +191,27 @@
                       <button style="float:right;"onclick="filterFunction2();myFunction2();" class="dropbtn2"><i class="fa fa-search"></i></button>
                       <input style="float:right;margin-top:10px;" type="text" placeholder="Search.." size="8" id="myInput2">
                     <div id="myDropdown2" class="dropdown-content2">
-                        <a href="/shop/men_shirts">Men Shirts</a>
-                        <a href="/shop/men_sweaters">Men Sweaters</a>
-                        <a href="/shop/men_trousers">Men Trousers</a>
-                        <a href="/shop/men_suits">Men suits</a>
-                        <a href="/shop/men_jeans">Men Jeans</a>
-                        <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
-                        <a href="/shop/boys_sets">Boys suits</a>
+                          <a href="/shop/men_shirts">Men Shirts</a>
+                          <a href="/shop/men_sweaters">Men Sweatshirts</a>
+                          <a href="/shop/men_trousers">Men Trousers</a>
+                          <a href="/shop/men_suits">Men suits</a>
+                          <a href="/shop/men_jeans">Men Jeans</a>
+                          <a href="/shop/men_kurtas">Men Kurtas and Kurtis</a>
+                          <a href="/shop/women_kurtas">Women Kurtas</a>
+                          <a href="/shop/women_ethnic">Women Ethnic</a>
+                          <a href="/shop/women_sarees">Women Sarees</a>
+                          <a href="/shop/women_dresses">Women Dresses</a>
+                          <a href="/shop/women_jumpsuits">Women Jumpsuits</a>
+                          <a href="/shop/women_sweatshirts">Women Sweatshirts</a>
+                          <a href="/shop/women_skirts">Women Skirts</a>
+                          <a href="/shop/women_palazzos">Women Palazzos</a>
+                          <a href="/shop/women_jeans">Women Jeans</a>
+                          <a href="/shop/boys_shirts">Boys Shirts</a>
+                          <a href="/shop/boys_trousers">Boys Trousers</a>
+                          <a href="/shop/boys_sets">Boys Sets</a>
+                          <a href="/shop/girls_dresses">Girls Dresses</a>
+                          <a href="/shop/girls_skirts">Girls Skirts</a>
+                          <a href="/shop/girls_sets">Girls Sets</a>
                       </div>
                 </div>
         </header>
@@ -203,7 +231,7 @@
         </div>
 
     </div>
-    <div>
+    <div class="ads">
         <img style="width:20%;height:20%;float:right;margin-right:-20%;margin-top:10%;" src="../static/images/women_advertisement.jpg">
         <h2 style="background-color:black;color:#c99947;width:20%;float:right;margin-right:-20%;margin-top:10%;text-align:center;">NEW COLLECTION</h2>
         <img style="width:15%;height:500px;float:left;margin-left:-12%;margin-top:10%;" src="../static/images/men_ads.jpg">
@@ -245,7 +273,45 @@ function myFunction(select,data) {
           }
           }
           }
-}
 
+}
+function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+        function filterFunction() {
+                  var input, filter, ul, li, a, i;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  div = document.getElementById("myDropdown");
+                  a = div.getElementsByTagName("a");
+                  for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
+                    } else {
+                      a[i].style.display = "none";
+                    }
+                  }
+                }
+          function myFunction2() {
+              document.getElementById("myDropdown2").classList.toggle("show");
+            }
+
+        function filterFunction2() {
+                  var input, filter, ul, li, a, i;
+                  input = document.getElementById("myInput2");
+                  filter = input.value.toUpperCase();
+                  div = document.getElementById("myDropdown2");
+                  a = div.getElementsByTagName("a");
+                  for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      a[i].style.display = "";
+                    } else {
+                      a[i].style.display = "none";
+                    }
+                  }
+                }
 </script>
 </html>
