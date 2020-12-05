@@ -224,23 +224,37 @@ a.circle:hover {
         color:#c99947;
         font-family: "Lucida Console", Courier, monospace;
 }
+.container{
+    margin-top: 15%;
+    margin-left: 27%;
+    margin-right: 10%;
+}
+.blog-container{
+    border: 2pt dashed #c99947;
+    display: inline-block;
+    width: 65%;
+    padding: 1%;
+    padding-bottom: 0;
+    background-color: #eaeaea;
+    margin-bottom:2%;
+}
 
-.ads img{
-float:right;
-margin-top:10%;
-margin-right:-18%;
-width:20%;
-}
-.ads p{
-    float:right;
-}
-.blog1{
-    margin-top:10%;
-    margin-left:15%;}
-    .blog1 img{
-    float:left;
-    width:60%;
-    height:600px;
+@media(max-width:819px){
+    .shop-container{
+        width: 100%;
     }
-    .blog1 img{
-    border:5px solid #c99947;}
+    .container{
+        margin-top: 20%;
+
+    }
+}
+
+.details-container{
+    font-weight: bold;
+    font-size: large;
+    padding-top: 1%;
+    font-style: italic;
+    width: 66%;
+    background-color:#c99947;
+    padding-left:1%;
+}

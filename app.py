@@ -1,5 +1,5 @@
 import mysql.connector
-import json
+from datetime import date
 from flask import Flask, render_template,request,session,redirect,url_for,Response
 mydb = mysql.connector.connect(
   host="127.0.0.1",
@@ -16,6 +16,7 @@ url=""
 category=""
 user=""
 filtered_serach=[]
+blog_id=1
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -39,7 +40,6 @@ def signUp_submit():
         print(d)
         if (d == ''):
             mycursor.execute(query1, val)
-            print(s_email)
             mydb.commit()
             return render_template("login.html", data="SUCCESSFUL")
 
@@ -89,7 +89,12 @@ def home():
 
 @app.route('/blog/')
 def blog():
-    return render_template('blog.html',)
+    query1 = "SELECT user_name,content_less,content_more,organisation,date FROM blog NATURAL JOIN customers"
+    mycursor.execute(query1)
+    d = mycursor.fetchall()
+    print(d)
+    l=len(d)
+    return render_template('blog.html',data=d,l=l)
 
 @app.route('/men/')
 def men():
@@ -221,5 +226,30 @@ def profile():
         url="profile"
         return render_template('login.html')
 
+@app.route('/blog_post/',methods=["POST"])
+def blog_post_method():
+    today = date.today()
+    print("Today's date:", today)
+    if 'email' in session:
+        less=""
+        more=""
+        content=request.form['content']
+        if(len(content)>100):
+            less=content[:30]
+            more=content[30:len(content)]
+        else:
+            less=content
+        org=request.form['org']
+        email=session['email']
+        query1 = "INSERT INTO blog(email_id,organisation,date,content_less,content_more)VALUES( %s, %s,%s,%s,%s)"
+        val=(email,org,str(today),less,more)
+        mycursor.execute(query1, val)
+        mydb.commit()
+
+
+        query = "SELECT user_name,email_id FROM styleup.customers"
+        mycursor.execute(query)
+        data = mycursor.fetchall()
+        return render_template("profile.html", msg="POST SUCCESSFUL",data=data)
 if __name__ == "__main__":
     app.run(debug=True)

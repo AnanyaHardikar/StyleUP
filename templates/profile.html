@@ -66,6 +66,7 @@
                     <form action="">
                         <button><i class="fa fa-heart"></i></button>
                     </form>
+
                     <form action="">
 
                         <button type="submit" style="float: right;"><i class="fa fa-search" ></i></button>
@@ -81,7 +82,9 @@
                 <p class="logo"><b>S T Y L E U P</b></p>
                 
             </div>
+            <div id="form1">
             <p style="margin-left: 45%;font-size: larger;"><b>Welcome {{data[0][0] }}</b></p>
+                <p style="margin-left:25%;color:#c99947">{{msg}}</p>
             <div class="profile-container">
                 <i class=" user fa fa-user" style="font-size: 60px;"></i>
                 <p>{{ data[0][0] }}</p>
@@ -99,10 +102,24 @@
                     <button><i class="fa fa-gift">Orders</i></button>
                 </form>
                 <br>
+                <button style="font-size: 18px;"class="open-button" onclick="openForm()"><i class='fab fa-blogger-b'><b>Blog</b></i></button>
+                <br>
                 <button onclick="document.getElementById('service').style.display='block'"><i class="fa fa-headset" style="font-size: 20px;">Customer Service</i></button>
                 <div id="service" class="service">
                     <p>Customer serive number:</p>
                     <p>Email:</p>
+                </div>
+                </div>
+    </div>
+            <div class="form-popup" id="form2">
+                  <form action="/blog_post/" class="form-container" method="post">
+                     <label><b>Organisation/Institution</b></label>
+                      <input type="text" placeholder="" name="org">
+                    <p><b>Write Here...</b></p>
+                    <textarea name="content" style="margin-left:5%;margin-right:5%;" id="w3review" name="w3review" rows="30" cols="100"></textarea>
+                    <button style="margin-left:25%;" type="submit" class="btn cancel">Post</button>
+                      <button style="margin-left:3%;" type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                  </form>
                 </div>
             </div>
         </div>
@@ -114,6 +131,16 @@
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
+        }
+        function openForm() {
+
+          document.getElementById("form2").style.display = "block";
+          document.getElementById("form1").style.display = "none";
+        }
+
+        function closeForm() {
+          document.getElementById("form2").style.display = "none";
+          document.getElementById("form1").style.display  = "block";
         }
     </script>
 </html>

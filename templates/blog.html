@@ -84,7 +84,9 @@
                     </form>
                 </div>
         </header>
+
         <br>
+
         <div class="content">
             <div class="head2">
                 <p class="logo"><b>S T Y L E U P</b></p>
@@ -96,35 +98,51 @@
                 </div>
             </div>
         </div>
-        <div class="ads">
-            <figure><img src="{{ url_for('static',filename='images/women_advertisement.jpg') }}"></figure>
-        </div>
 
-        <div>
-            <h2 style="background-color:#c99947;width:290px;height:30px;margin-top:30%;text-align:center;float:right;margin-right:-19%">NEW COLLECTION</h2>
-        </div>
+    </div>
+    <div>
+        <img style="width:20%;height:20%;float:right;margin-right:-20%;margin-top:10%;" src="../static/images/women_advertisement.jpg">
+        <h2 style="background-color:black;color:#c99947;width:20%;float:right;margin-right:-20%;margin-top:10%;text-align:center;">NEW COLLECTION</h2>
+        <img style="width:15%;height:5l.00px;float:left;margin-left:-12%;margin-top:10%;" src="../static/images/men_ads.jpg">
+    </div>
+        <div  class="container">
+            {% for i in range(l) %}
+            <div class="details-container">
+                <p>{{data[i][0]}} - {{data[i][3]}}</p>
+            </div>
+            <div class="blog-container">
 
-        <div class="blog1">
-           <img src="{{ url_for('static',filename='images/women_kurtis.jpg') }}">
+                        <p id="less">{{data[i][1]}}<span id="dots">...</span><span style="display:none;" id="more_{{i}}">{{data[i][2]}}</span></p>
+                <button onclick="myFunction('myBtn_{{i}}',{{data}})" id="myBtn_{{i}}">Read more</button>
+                <button style="float:right" >{{data[i][4]}}</button>
+            </div>
+            {% endfor %}
         </div>
-        <div>
-            <h2 style="background-color:#c99947;width:60px;height:60px;text-align:center;float:left;margin-left:-54%;margin-top:-1%;">Nov 11</h2>
-        </div>
-        <div><p style="margin-top:53%;margin-left:15%;margin-right:10%;color:grey;font-size:18px;">Shalwars are trousers which are atypically wide
-            at the waist but which narrow to a cuffed bottom. They are held up by a drawstring or elastic belt,
-            which causes them to become pleated around the waist.The trousers can be wide and baggy, or they can be cut
-            quite narrow, on the bias. Shalwars have been traditionally worn in a wide region which includes Eastern Europe,
-            West Asia,Central Asia, and South Asia. The kameez is a long shirt or tunic.The side seams are left open below
-            the waist-line (the opening known as the chaak[note 1]), which gives the wearer greater freedom of movement.
-            The kameez is usually cut straight and flat; older kameez use traditional cuts; modern kameez are more likely
-            to have European-inspired set-in sleeves. The kameez may have a European-style collar, a Mandarin collar, or
-            it may be collarless; in the latter case, its design as a women's garment is similar to a kurta. The combination
-            garment is sometimes called salwar kurta, salwar suit, or Punjabi suit The shalwar and kameez were introduced
-            into South Asia after the arrival of Muslims in the north in the 13th century: at first worn by Muslim women,
-            their use gradually spread, making them a regional style, especially in the historical Punjab region.
-            The shalwar-kameez is a widely-worn,and national dress,of Pakistan.
-            It is also widely worn by men in Afghanistan, and by women and some men in the Punjab region of India,
-            from which it has been adopted by women throughout India, and more generally in South Asia.</p>
-        <p style="float:right;margin-right:10%;margin-top:-1%;font-size:20px;">By- Sadhana Bhat</p></div>
     </body>
+
+<script>
+
+function myFunction(select,data) {
+  
+    for(var i=0;i<data.length;i++)
+    {
+        if(select==("myBtn_"+i)){
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more_"+i);
+          var btnText = document.getElementById(select);
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+          }
+          }
+          }
+}
+
+</script>
 </html>
